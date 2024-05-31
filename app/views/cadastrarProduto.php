@@ -3,6 +3,8 @@ $this->layout('master', ['title' => 'Produtos - SupportMercado']);
 ?>
 
 <h1>Produtos</h1>
+<h4>Página de cadastrar produto</h4>
+
 <form action="cadastrarproduto" method="post">
 
     <label for="produto">Produto</label>

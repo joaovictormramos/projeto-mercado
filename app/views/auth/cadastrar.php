@@ -1,6 +1,7 @@
 <?php $this->layout('master', ['title' => 'Criar conta - SupportMercado'])?>
 
 <h1>Cadastrar usuário</h1>
+<h4>Página de cadastro</h4>
 
 <form action="/auth/cadastrar" method="post">
     <label for="nomeCompleto">Nome</label>

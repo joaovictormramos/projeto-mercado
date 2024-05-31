@@ -19,4 +19,9 @@ class UsuarioController extends Controller
         $this->view('usuario/perfil', $dadosUsuario);
     }
 
+    public function minhasListas()
+    {
+        $this->view('usuario/minhaslistas');
+    }
+
 }

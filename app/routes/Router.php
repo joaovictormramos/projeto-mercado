@@ -43,7 +43,8 @@ class Router
                 '/auth/login' => fn() => self::load('AuthController', 'formLogin'),
                 '/auth/logout' => fn() => self::load('AuthController', 'logout'),
                 '/usuario/perfil' => fn() => self::load('UsuarioController', 'dashboard'),
-                '/listar' => fn() => self::load('ProdutoController', 'exibirProdutos'),
+                '/usuario/minhaslistas' => fn() => self::load('UsuarioController', 'minhasListas'),
+                //'/listar' => fn() => self::load('ProdutoController', 'exibirProdutos'),
             ],
             'post' => [
                 '/contact' => fn() => self::load('ContactController', 'store'),
