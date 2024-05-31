@@ -57,6 +57,7 @@ class AuthController extends Controller
             if ($auth->login($email, $senha) == true) {
                 $nome = $_SESSION['usuario_nome'];
                 $this->view('home', ['title' => 'Home', 'nome' => $nome]);
+                $this->redirect('/');
             }
         }
     }

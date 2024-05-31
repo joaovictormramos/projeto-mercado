@@ -39,11 +39,11 @@ class ProdutoController extends Controller
         }
     }
 
-    public function listarProdutos()
+    public function exibirProdutos()
     {
         $produtos = new Produto();
-        $listaProdutos = $produtos->listarProdutos();
-        return $listaProdutos;
+        $listaprodutos = $produtos->listarProdutos();
+        return $listaprodutos;
 
     }
 }

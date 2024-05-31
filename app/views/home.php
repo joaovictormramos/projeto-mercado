@@ -5,23 +5,23 @@ $this->layout('master', ['title' => 'Home']);
 ?>
 
 <h1>Home - SupportMercado</h1>
+<h4>Página incial</h4>
 
 <?php if ($_SESSION['logado'] == true) {
-    echo "<p>Olá, " . " " . $nome . "</p>
+    echo "<p>Olá, " . $nome . "</p>
    <a href='usuario/perfil'>Perfil</a>";
-} else {?>
-    <a href="auth/login">Login</a>
-    <a href="auth/cadastrar">Cadastrar</a>
-<?php }
+} else {
+    echo '<a href="auth/login">Login</a>';
+    echo '<a href="auth/cadastrar">Cadastrar</a>';
+}
 
-if (empty($listarprodutos)) {
+if (empty($listaprodutos)) {
     echo ' vazio';
 } else {
-    foreach ($listarprodutos as $produto) {
+    foreach ($listaprodutos as $produto) {
         echo '<div>' . $produto['produto'] . ' ' . $produto['marca_nome'] . ' '
             . $produto['medida'] . $produto['unidademedida'];
     }
 }
-
 ?>
 
