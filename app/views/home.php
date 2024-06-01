@@ -11,8 +11,7 @@ $this->layout('master', ['title' => 'Home']);
     echo "<p>Olá, " . $nome . "</p>
    <a href='usuario/perfil'>Perfil</a>";
 } else {
-    echo '<a href="auth/login">Login</a>';
-    echo '<a href="auth/cadastrar">Cadastrar</a>';
+    echo '<a href="auth/login">Login</a>' . ' ' . '<a href="auth/cadastrar">Cadastrar</a>';
 }
 
 if (empty($listaprodutos)) {
