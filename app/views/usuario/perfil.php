@@ -9,5 +9,6 @@ $this->layout('master', ['title' => 'Perfil do usuário']);
 <form action="../auth/logout" method="get">
     <button>Sair</button>
 </form>
+<a href="criarlista">Criar lista</a>
 <a href="/usuario/minhaslistas">Minhas listas</a>
-    <a href="/">Página inicial</a>
+<a href="/">Página inicial</a>

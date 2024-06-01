@@ -44,6 +44,7 @@ class Router
                 '/auth/logout' => fn() => self::load('AuthController', 'logout'),
                 '/usuario/perfil' => fn() => self::load('UsuarioController', 'dashboard'),
                 '/usuario/minhaslistas' => fn() => self::load('UsuarioController', 'minhasListas'),
+                '/usuario/criarlista' => fn() => self::load('ListaController', 'formCriaLista'),
                 //'/listar' => fn() => self::load('ProdutoController', 'exibirProdutos'),
             ],
             'post' => [
