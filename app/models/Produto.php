@@ -33,7 +33,7 @@ class Produto
 
     public function listarProdutos()
     {
-        $sql = "SELECT produto.produto, marca.marca_nome, produto.medida, produto.unidademedida
+        $sql = "SELECT produto.produto_produto, marca.marca_nome, produto.produto_medida, produto.produto_unidademedida
                 FROM tb_pjm_produto produto
                 JOIN tb_pjm_marca marca ON marca.marca_id = produto.marca_id";
         $stmt = $this->connection->prepare($sql);

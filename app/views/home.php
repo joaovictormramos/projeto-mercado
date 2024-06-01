@@ -18,8 +18,8 @@ if (empty($listaprodutos)) {
     echo ' vazio';
 } else {
     foreach ($listaprodutos as $produto) {
-        echo '<div>' . $produto['produto'] . ' ' . $produto['marca_nome'] . ' '
-            . $produto['medida'] . $produto['unidademedida'];
+        echo '<div>' . $produto['produto_produto'] . ' ' . $produto['marca_nome'] . ' '
+            . $produto['produto_medida'] . $produto['produto_unidademedida'];
     }
 }
 ?>
