@@ -7,7 +7,7 @@ class AuthController extends Controller
 {
     public function formCadastrarUsuario()
     {
-        $this->view('auth/cadastrar', ['title' => 'Criar conta - SupportMercado']);
+        $this->view('auth/cadastrar');
     }
 
     public function cadastrar()
@@ -39,7 +39,7 @@ class AuthController extends Controller
 
     public function formLogin()
     {
-        $this->view('auth/login', ['title' => 'Entrar - SupportMercado']);
+        $this->view('auth/login');
     }
 
     public function login()

@@ -5,13 +5,13 @@ class AdminController extends Controller
 {
     public function painelAdmin()
     {
-        $this->view('admin/paineladmin', ['title' => 'Painel de administração']);
+        $this->view('admin/paineladmin');
 
     }
 
     public function formCadastrarEstabelecimento()
     {
-        $this->view('admin/formCadastrarEstabelecimento', ['title' => 'Cadastrar estabelecimento']);
+        $this->view('admin/formCadastrarEstabelecimento');
 
     }
 

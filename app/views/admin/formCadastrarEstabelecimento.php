@@ -1,5 +1,5 @@
 <?php
-$this->layout('master', ['title' => 'Produtos - SupportMercado']);
+$this->layout('master', ['title' => 'Cadastrar estabelecimento']);
 ?>
 
 <h1>Estabelecimentos</h1>

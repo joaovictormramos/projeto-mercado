@@ -5,7 +5,7 @@ class ListaController extends Controller
 {
     public function formCriaLista()
     {
-        $this->view('usuario/criarlista', ['title' => 'Criar lista']);
+        $this->view('usuario/criarlista');
     }
 
     public function criarLista()
