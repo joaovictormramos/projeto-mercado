@@ -38,20 +38,23 @@ class Router
             'get' => [
                 '/' => fn() => self::load('HomeController', 'index'),
                 '/contact' => fn() => self::load('ContactController', 'index'),
-                '/produto/cadastrarproduto' => fn() => self::load('ProdutoController', 'formularioAdicionarProduto'),
                 '/auth/cadastrar' => fn() => self::load('AuthController', 'formCadastrarUsuario'),
                 '/auth/login' => fn() => self::load('AuthController', 'formLogin'),
                 '/auth/logout' => fn() => self::load('AuthController', 'logout'),
                 '/usuario/perfil' => fn() => self::load('UsuarioController', 'dashboard'),
                 '/usuario/minhaslistas' => fn() => self::load('UsuarioController', 'minhasListas'),
                 '/usuario/criarlista' => fn() => self::load('ListaController', 'formCriaLista'),
+                '/produto/cadastrarproduto' => fn() => self::load('AdminController', 'formCadastrarProduto'),
+                '/admin' => fn() => self::load('AdminController', 'painelAdmin'),
+                '/admin/cadastrarestabelecimento' => fn() => self::load('AdminController', 'formCadastrarEstabelecimento'),
                 //'/listar' => fn() => self::load('ProdutoController', 'exibirProdutos'),
             ],
             'post' => [
                 '/contact' => fn() => self::load('ContactController', 'store'),
-                '/produto/cadastrarproduto' => fn() => self::load('ProdutoController', 'cadastrarProduto'),
+                '/produto/cadastrarproduto' => fn() => self::load('AdminController', 'cadastrarProduto'),
                 '/auth/cadastrar' => fn() => self::load('AuthController', 'cadastrar'),
                 '/login' => fn() => self::load('AuthController', 'login'),
+                '/admin/cadastrarestabelecimento' => fn() => self::load('AdminController', 'cadastrarestabelecimento'),
 
             ],
         ];

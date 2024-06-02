@@ -21,7 +21,7 @@ class Produto
 
     public function cadastrarProduto($produto, $marca_id, $medida, $unidadeMedida)
     {
-        $sql = "INSERT INTO tb_pjm_produto(produto, marca_id, medida, unidadeMedida)
+        $sql = "INSERT INTO tb_pjm_produto(produto_produto, marca_id, produto_medida, produto_unidadeMedida)
         VALUES (?, ?, ?, ?)";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $produto);

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$this->layout('master', ['title' => 'Perfil do usuário']);
+$this->layout('master', ['title' => 'Minhas listas']);
 
 ?>
 <h1>SupportMercado</h1>

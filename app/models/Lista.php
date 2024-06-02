@@ -12,12 +12,8 @@ class Lista
         $this->connection = Connect::connectDatabase();
     }
 
-    public function getAllMarcas()
+    public function criar()
     {
-        $sql = "SELECT marca_id, marca_nome FROM tb_pjm_marca ORDER BY marca_nome";
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute();
-        $marcas = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        return $marcas;
+       
     }
 }
