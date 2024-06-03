@@ -47,7 +47,7 @@ class Router
                 '/usuario/criarlista' => fn() => self::load('ListaController', 'formCriaLista'),
                 '/produto/cadastrarproduto' => fn() => self::load('ProdutoController', 'formCadastrarProduto'),
                 '/admin' => fn() => self::load('AdminController', 'painelAdmin'),
-                '/admin/cadastrarestabelecimento' => fn() => self::load('AdminController', 'formCadastrarEstabelecimento'),
+                '/admin/cadastrarestabelecimento' => fn() => self::load('EstabelecimentoController', 'formCadastrarEstabelecimento'),
                 //'/listar' => fn() => self::load('ProdutoController', 'exibirProdutos'),
             ],
             'post' => [
@@ -56,7 +56,7 @@ class Router
                 '/auth/cadastrar' => fn() => self::load('AuthController', 'cadastrar'),
                 '/auth/login' => fn() => self::load('AuthController', 'login'),
                 //'/auth/recuperarsenha' => fn() => self::load('AuthController', 'recuperarSenha'),
-                '/admin/cadastrarestabelecimento' => fn() => self::load('AdminController', 'cadastrarestabelecimento'),
+                '/admin/cadastrarestabelecimento' => fn() => self::load('EstabelecimentoController', 'cadastrarEstabelecimento'),
 
             ],
         ];

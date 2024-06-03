@@ -18,10 +18,10 @@ class Auth
         $sql = "INSERT INTO tb_pjm_usuario(usuario_nome_completo, usuario_cpf, usuario_email, usuario_senha)
         VALUES (?, ?, ?, ?)";
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(1, $nome);
-        $stmt->bindParam(2, $cpf);
-        $stmt->bindParam(3, $email);
-        $stmt->bindParam(4, $senha);
+        $stmt->bindParam(1, $nome, \PDO::PARAM_STR);
+        $stmt->bindParam(2, $cpf, \PDO::PARAM_STR);
+        $stmt->bindParam(3, $email, \PDO::PARAM_STR);
+        $stmt->bindParam(4, $senha, \PDO::PARAM_STR);
         $stmt->execute();
     }
 
@@ -30,7 +30,7 @@ class Auth
         $sql = "SELECT usuario_senha, usuario_nome_completo FROM tb_pjm_usuario
         WHERE usuario_email = (?) LIMIT 1";
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(1, $email);
+        $stmt->bindParam(1, $email, \PDO::PARAM_STR);
         $stmt->execute();
         $usuario = $stmt->fetch(\PDO::FETCH_OBJ);
 
@@ -61,7 +61,7 @@ class Auth
     {
         $sql = "SELECT verificaCadastroEmail(?)";
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(1, $email);
+        $stmt->bindParam(1, $email, \PDO::PARAM_STR);
         $stmt->execute();
         $emailCadastrado = $stmt->fetchColumn();
 
@@ -73,7 +73,7 @@ class Auth
     {
         $sql = "SELECT verificaCadastroCPF(?)";
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(1, $cpf);
+        $stmt->bindParam(1, $cpf, \PDO::PARAM_STR);
         $stmt->execute();
         $cpfCadastrado = $stmt->fetchColumn();
         return $cpfCadastrado;

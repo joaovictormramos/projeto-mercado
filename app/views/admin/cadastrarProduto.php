@@ -14,7 +14,7 @@ $this->layout('master', ['title' => 'Produtos - SupportMercado']);
     <select name="marcaId" id="" required>
         <option value=""></option>
         <?php foreach ($marcas as $marca): ?>
-            <option value="<?php echo $marca['marca_id']; ?>"><?php echo $marca['marca_nome']; ?></option>
+            <option value="<?php echo $marca->marcaid; ?>"><?php echo $marca->marcanome; ?></option>
         <?php endforeach;?>
     </select>
 
@@ -32,5 +32,6 @@ $this->layout('master', ['title' => 'Produtos - SupportMercado']);
     </select>
     <button>Cadastrar</button>
 </form>
+<a href="../admin">Voltar</a>
 
 <?php

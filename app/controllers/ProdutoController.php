@@ -24,7 +24,7 @@ class ProdutoController extends Controller
 
     public function cadastrarProduto()
     {
-        if (empty($_POST['produto']) || empty($_POST['marcaId']) || empty($_POST['medida']) || empty($_POST['unidadeMedida'])) {
+        if (empty($_POST['produto']) || empty($_POST['marcad']) || empty($_POST['medida']) || empty($_POST['unidadeMedida'])) {
             echo 'Preencha todos os campos.';
         }
 

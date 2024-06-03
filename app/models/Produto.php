@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 use app\config\Connect;
@@ -15,12 +16,12 @@ class Produto
     public function cadastrarProduto($produto, $marca_id, $medida, $unidadeMedida)
     {
         $sql = "INSERT INTO tb_pjm_produto(produto_produto, marca_id, produto_medida, produto_unidadeMedida)
-        VALUES (?, ?, ?, ?)";
+                VALUES (?, ?, ?, ?)";
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(1, $produto);
-        $stmt->bindParam(2, $marca_id);
-        $stmt->bindParam(3, $medida);
-        $stmt->bindParam(4, $unidadeMedida);
+        $stmt->bindParam(1, $produto, \PDO::PARAM_STR);
+        $stmt->bindParam(2, $marca_id, \PDO::PARAM_INT);
+        $stmt->bindParam(3, $medida, \PDO::PARAM_STR);
+        $stmt->bindParam(4, $unidadeMedida, \PDO::PARAM_STR);
         $stmt->execute();
     }
 

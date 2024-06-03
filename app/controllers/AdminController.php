@@ -11,11 +11,11 @@ class AdminController extends Controller
 
     }
 
-    public function formCadastrarEstabelecimento()
+    /*public function formCadastrarEstabelecimento()
     {
         //$this->view('admin/cadastrarEstabelecimento');
 
-    }
+    }*/
 
     public function cadastrarEstabelecimento()
     {
