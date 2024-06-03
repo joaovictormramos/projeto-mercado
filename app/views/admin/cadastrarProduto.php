@@ -10,11 +10,11 @@ $this->layout('master', ['title' => 'Produtos - SupportMercado']);
     <label for="produto">Produto</label>
     <input type="text" name="produto" required>
 
-    <label for="marca">Marca</label>
+    <label for="marcaId">Marca</label>
     <select name="marcaId" id="" required>
         <option value=""></option>
         <?php foreach ($marcas as $marca): ?>
-            <option value="<?php echo $marca['marca_id'];?>"><?php echo $marca['marca_nome']; ?></option>
+            <option value="<?php echo $marca['marca_id']; ?>"><?php echo $marca['marca_nome']; ?></option>
         <?php endforeach;?>
     </select>
 
@@ -33,3 +33,4 @@ $this->layout('master', ['title' => 'Produtos - SupportMercado']);
     <button>Cadastrar</button>
 </form>
 
+<?php

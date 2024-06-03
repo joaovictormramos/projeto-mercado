@@ -10,4 +10,5 @@ $this->layout('master', ['title' => 'Criar lista']);
     <label for="listaNome">Nome da lista</label>
     <input type="text">
 </form>
+<a href="perfil">Voltar</a>
 

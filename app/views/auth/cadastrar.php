@@ -8,12 +8,12 @@
     <abbr title="Nome completo">
         <input type="text" name="nomeCompleto" required>
     </abbr>
-    
-    <label for="cpf">CPF</label>
-    <input type="number" name="cpf" required>
 
     <label for="email">Email</label>
     <input type="text" name="email" required>
+    
+    <label for="cpf">CPF</label>
+    <input type="number" name="cpf" required>
 
     <label for="senha">Senha</label>
     <input type="password" name="senha" required>

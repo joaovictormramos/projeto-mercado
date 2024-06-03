@@ -12,13 +12,6 @@ class Produto
         $this->connection = Connect::connectDatabase();
     }
 
-    public function marca()
-    {
-        $marcaModel = new Marca();
-        $marcas = $marcaModel->getAllMarcas();
-        return $marcas;
-    }
-
     public function cadastrarProduto($produto, $marca_id, $medida, $unidadeMedida)
     {
         $sql = "INSERT INTO tb_pjm_produto(produto_produto, marca_id, produto_medida, produto_unidadeMedida)

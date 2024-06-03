@@ -32,14 +32,14 @@ class Auth
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $email);
         $stmt->execute();
-        $usuario = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $usuario = $stmt->fetch(\PDO::FETCH_OBJ);
 
-        if (!$usuario || !password_verify($senha, $usuario['usuario_senha'])) {
+        if (!$usuario || !password_verify($senha, $usuario->usuario_senha)) {
             echo 'Falha na autenticação.';
             return false;
         } else {
             session_start();
-            $nome = explode(' ', $usuario['usuario_nome_completo']);
+            $nome = explode(' ', $usuario->usuario_nome_completo);
             $_SESSION['usuario_nome'] = $nome[0] . ' ' . $nome[1];
             $_SESSION['usuario_email'] = $email;
             $_SESSION['logado'] = true;
@@ -47,8 +47,35 @@ class Auth
         }
     }
 
-    public function recuperarSenha()
+    /*Em construção
+    public function recuperarSenha($senha)
     {
+        $sql = "INSERT INTO tb_pjm_usuario(usuario_senha)
+        VALUES (?)";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(1, $senha);
+        $stmt->execute();
+    }*/
 
+    public function verificaCadastroEmail($email)
+    {
+        $sql = "SELECT verificaCadastroEmail(?)";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(1, $email);
+        $stmt->execute();
+        $emailCadastrado = $stmt->fetchColumn();
+
+        return $emailCadastrado;
+    
+    }
+
+    public function verificaCadastroCpf($cpf)
+    {
+        $sql = "SELECT verificaCadastroCPF(?)";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(1, $cpf);
+        $stmt->execute();
+        $cpfCadastrado = $stmt->fetchColumn();
+        return $cpfCadastrado;
     }
 }

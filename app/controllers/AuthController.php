@@ -12,25 +12,33 @@ class AuthController extends Controller
 
     public function cadastrar()
     {
+        $auth = new Auth();
+
         if (empty($_POST['nomeCompleto']) || empty($_POST['cpf']) || empty($_POST['email']) || empty($_POST['senha'])) {
             echo 'Preencha todos os campos';
 
         } else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             echo 'Email inválido.';
 
+        } else if ($auth->verificaCadastroEmail($_POST['email'])) {
+            echo 'Email já cadastrado.';
+
         } else if (!self::validaCPF($_POST['cpf'])) {
             echo 'CPF inválido.';
+
+        } else if ($auth->verificaCadastroCpf($_POST['cpf'])) {
+            echo 'CPF já cadastrado.';
 
         } else if ($_POST['senha'] != $_POST['confirmaSenha']) {
             echo 'Senhas não coincidem.';
 
         } else {
-            $nome = trim(ucwords($_POST['nomeCompleto']));
+            $caracteresEspeciais = '/[^a-zA-Z\sçÇáéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕàÀüÜ]/u';
+            $nome = preg_replace($caracteresEspeciais, '', trim(ucwords($_POST['nomeCompleto'])));
             $cpf = trim($_POST['cpf']);
             $email = trim($_POST['email']);
             $senha = trim(password_hash($_POST['senha'], PASSWORD_DEFAULT));
 
-            $auth = new Auth();
             $auth->cadastrarUsuario($nome, $cpf, $email, $senha);
 
             $this->redirect('../');
@@ -71,10 +79,30 @@ class AuthController extends Controller
         exit();
     }
 
+    public function formRecuperarSenha()
+    {
+        $this->view('auth/recuperarsenha');
+    }
+
+    /*Em construção
     public function recuperarSenha()
     {
+        $auth = new Auth();
 
-    }
+        if (empty($_POST['email'])) {
+            echo 'Digite o email cadastrado';
+
+        }
+
+        $email = trim($_POST['email']);
+
+        if (!$auth->verificaCadastroEmail($email)) {
+            echo 'Email não cadastrado';
+        }
+
+        //$auth->recuperarsenha($senha);
+
+    }*/
 
     private static function validaCPF($cpf)
     {

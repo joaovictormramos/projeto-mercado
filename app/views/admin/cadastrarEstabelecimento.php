@@ -7,7 +7,11 @@ $this->layout('master', ['title' => 'Cadastrar estabelecimento']);
 
 <form action="cadastrarestabelecimento" method="post">
     <label for="estabelecimento">Nome do estabelecimento</label>
-    <input type="text" name="estabelecimento">
+    <input type="text" name="estabelecimento" required>
+
+    <label for="endereco">Endereço</label>
+    <input type="text" name="endereco" required>
+
     <button>Cadastrar</button>
 </form>
 
