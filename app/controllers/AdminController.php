@@ -7,7 +7,7 @@ class AdminController extends Controller
 {
     public function painelAdmin()
     {
-        $this->view('admin/paineladmin');
+        $this->view('admin/painelAdmin');
 
     }
 

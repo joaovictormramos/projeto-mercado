@@ -23,4 +23,13 @@ class Estabelecimento
 
     }
 
+    public function getAllEstabelecimentos()
+    {
+        $sql = "SELECT * FROM tb_pjm_estabelecimento";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        $estabelecimentos = $stmt->fetchAll(\PDO::FETCH_OBJ);
+        return $estabelecimentos;
+    }
+
 }

@@ -5,14 +5,17 @@ use app\models\Estabelecimento;
 
 class EstabelecimentoController extends Controller
 {
-    public function formCadastrarEstabelecimento()
+    public function formGerenciarEstabelecimento()
     {
-        $this->view('admin/cadastrarestabelecimento');
+        $estabelecimentos = new Estabelecimento();
+        $estabelecimentos = $estabelecimentos->getAllEstabelecimentos();
+        $this->view('admin/gerenciarEstabelecimento', ['estabelecimentos' => $estabelecimentos]);
+
     }
 
     public function cadastrarEstabelecimento()
     {
-        if (empty($_POST['estabelecimentonome']) || empty($_POST['endereco'])){
+        if (empty($_POST['estabelecimentonome']) || empty($_POST['endereco'])) {
             echo 'Preencha todos os campos.';
         }
         $estabelecimentoNome = $_POST['estabelecimentonome'];
@@ -21,5 +24,16 @@ class EstabelecimentoController extends Controller
         $estabelecimento = new Estabelecimento();
         $estabelecimento->cadastrarEstabelecimento($estabelecimentoNome, $endereco);
         $this->redirect('cadastrarestabelecimento');
+        
+    }
+
+    public function formGerenciarProdutos()
+    {
+        $this->view('admin/gerenciarProdutos');
+    }
+
+    public function gerenciarProdutos()
+    {
+       
     }
 }

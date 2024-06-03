@@ -81,7 +81,7 @@ class AuthController extends Controller
 
     public function formRecuperarSenha()
     {
-        $this->view('auth/recuperarsenha');
+        $this->view('auth/recuperarSenha');
     }
 
     /*Em construção

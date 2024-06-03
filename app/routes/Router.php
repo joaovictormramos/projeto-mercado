@@ -47,7 +47,8 @@ class Router
                 '/usuario/criarlista' => fn() => self::load('ListaController', 'formCriaLista'),
                 '/produto/cadastrarproduto' => fn() => self::load('ProdutoController', 'formCadastrarProduto'),
                 '/admin' => fn() => self::load('AdminController', 'painelAdmin'),
-                '/admin/cadastrarestabelecimento' => fn() => self::load('EstabelecimentoController', 'formCadastrarEstabelecimento'),
+                '/admin/gerenciarestabelecimento' => fn() => self::load('EstabelecimentoController', 'formGerenciarEstabelecimento'),
+                '/admin/gerenciarprodutos' => fn() => self::load('EstabelecimentoController', 'formGerenciarProdutos'),
                 //'/listar' => fn() => self::load('ProdutoController', 'exibirProdutos'),
             ],
             'post' => [
