@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Reescrever URL para editar estoque
+RewriteRule ^editarestoque/([0-9]+)$ editarestoque.php?id=$1 [L]
+
+# Reescrever URL para editar registro
+RewriteRule ^editarregistro/([0-9]+)$ editarregistro.php?id=$1 [QSA, L]

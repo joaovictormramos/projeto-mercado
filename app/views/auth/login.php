@@ -6,7 +6,7 @@ $this->layout('master', ['title' => 'Entrar - SupportMercado'])
 <h4>Página de login</h4>
 
 
-<form action="auth/login" method="post">
+<form action="login" method="post">
 
     <label for="email">Email</label>
     <input type="text" name="email">
@@ -18,4 +18,3 @@ $this->layout('master', ['title' => 'Entrar - SupportMercado'])
 
 </form>
 <a href="/">Retornar</a>
-<a href="/auth/recuperarsenha">Recuperar senha</a>

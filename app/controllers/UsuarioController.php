@@ -3,7 +3,7 @@ namespace app\controllers;
 
 class UsuarioController extends Controller
 {
-    public function dashboard()
+    public function perfil()
     {
         session_start();
 

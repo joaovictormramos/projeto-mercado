@@ -3,8 +3,8 @@ namespace app\helpers;
 
 class Uri
 {
-    public static function get($type): string
+    public static function get(string $key): string
     {
-        return parse_url($_SERVER['REQUEST_URI'])[$type];
+        return $_GET[$key] ?? '/';
     }
 }

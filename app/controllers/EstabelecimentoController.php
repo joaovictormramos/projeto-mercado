@@ -13,6 +13,19 @@ class EstabelecimentoController extends Controller
 
     }
 
+    public function formEditarEstoque()
+    {
+        var_dump($_POST);
+        $this->view('admin/editarestoque');
+
+    }
+
+    public function formCadastrarEstabelecimento()
+    {
+        $this->view('admin/cadastrarEstabelecimento');
+
+    }
+
     public function cadastrarEstabelecimento()
     {
         if (empty($_POST['estabelecimentonome']) || empty($_POST['endereco'])) {
@@ -24,7 +37,7 @@ class EstabelecimentoController extends Controller
         $estabelecimento = new Estabelecimento();
         $estabelecimento->cadastrarEstabelecimento($estabelecimentoNome, $endereco);
         $this->redirect('cadastrarestabelecimento');
-        
+
     }
 
     public function formGerenciarProdutos()
@@ -32,8 +45,8 @@ class EstabelecimentoController extends Controller
         $this->view('admin/gerenciarProdutos');
     }
 
-    public function gerenciarProdutos()
+    public function gerenciarEstoque($estabelecimentoId)
     {
-       
+        
     }
 }

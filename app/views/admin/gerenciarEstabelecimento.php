@@ -1,22 +1,30 @@
 <?php
-$this->layout('master', ['title' => 'Cadastrar estabelecimento']);
+$this->layout('master', ['title' => 'Gerenciamento']);
 ?>
 
-<h1>Estabelecimentos</h1>
-<h4>Página de cadastrar estabelecimento</h4>
+<h1>Gerenciamento</h1>
 
 <table>
 <?php
-foreach($estabelecimentos as $estabelecimento) {
-    echo    '<tr>
-                <td><h4>' .  $estabelecimento->estabelecimento_nome . '</h4></td>
-                <td><button> Editar estoque</button></td>
-                <td><button> Editar registro</button></td>
-            </tr>';
+foreach ($estabelecimentos as $estabelecimento) {?>
+    <tr>
+        <td>
+            <h4> <?php echo $estabelecimento->estabelecimento_nome; ?> </h4>
+        </td>
+        <td>
+        <form action="/admin/editarestoque" method="post">
+            <button value="<?php echo $estabelecimento->estabelecimento_id; ?>">Editar estoque</a>
+        </form>
+        </td>
+        <td>
+            <a href="">Editar registro</a>
+        </td>
+    </tr>
+<?php
 }
 ?>
 </table>
 
-<button>Cadastrar novo estabelecimento</button>
+<a href="/admin/cadastrarestabelecimento">Cadastrar novo estabelecimento</a>
 
 <a href="/admin">Voltar</a>

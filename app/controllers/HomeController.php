@@ -9,8 +9,6 @@ class HomeController extends Controller
 
         if ($_SESSION['logado'] == true) {
             $nome = $_SESSION['usuario_nome'];
-        } else {
-
         }
 
         $produtos = new ProdutoController();
