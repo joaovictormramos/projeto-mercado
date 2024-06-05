@@ -1,7 +1,6 @@
 <?php
 namespace app\controllers;
 
-use app\controllers\MarcaController;
 use app\models\Produto;
 
 class ProdutoController extends Controller
@@ -21,33 +20,12 @@ class ProdutoController extends Controller
 
     }
 
-    public function formCadastrarProduto()
+    public function obterProdutosPorEstabelecimento($estabelecimentoId)
     {
-        $marcaController = new MarcaController();
-        $marcas = $marcaController->getMarcas();
-        $this->view('admin/cadastrarProduto', ['marcas' => $marcas]);
+        $produtos = new Produto();
+        $listaprodutos = $produtos->listarProdutosPorEstabelecimento($estabelecimentoId);
+        return $listaprodutos;
 
-    }
-
-    public function cadastrarProduto()
-    {
-        if (empty($_POST['produto'])) {
-            echo 'Preencha nome produto.';
-        } else if (empty($_POST['marcad'])) {
-            echo 'Preencha marca';
-        } else if (empty($_POST['medida'])) {
-            echo 'Preencha medida';
-        } else if (empty($_POST['unidadeMedida'])) {
-            echo 'Preencha unidade de medida';
-        }
-
-        $produto = $_POST['produto'];
-        $marcaId = $_POST['marcaId'];
-        $medida = $_POST['medida'];
-        $unidadeMedida = $_POST['unidadeMedida'];
-
-        $novoProduto = new Produto();
-        $novoProduto->cadastrarProduto($produto, $marcaId, $medida, $unidadeMedida);
     }
 
 }

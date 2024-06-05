@@ -12,8 +12,4 @@ class Lista
         $this->connection = Connect::connectDatabase();
     }
 
-    public function criar()
-    {
-       
-    }
 }
