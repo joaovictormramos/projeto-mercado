@@ -2,31 +2,32 @@
 namespace app\controllers;
 
 use app\controllers\ProdutoController;
+use app\controllers\EstabelecimentoController;
 
 class AdminController extends Controller
 {
-    public function painelAdmin()
+    public function index()
     {
         $this->view('admin/painelAdmin');
 
     }
 
-    /*public function formCadastrarEstabelecimento()
+
+    public function gerenciarEstabelecimento()
     {
-        //$this->view('admin/cadastrarEstabelecimento');
-
-    }*/
-
-    public function cadastrarEstabelecimento()
-    {
-
+        $estabelecimentoController = new EstabelecimentoController();
+        $estabelecimentoController->formGerenciarEstabelecimento();
     }
 
     public function cadastrarProduto()
     {
         $produtoController = new ProdutoController();
-        $produtoController->cadastrarProduto();
-        $this->redirect('/produto/cadastrarproduto');
+        $produtoController->formCadastrarProduto();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $produtoController->cadastrarProduto();
+            $this->redirect('cadastrarproduto');
+        }
     }
 
 }

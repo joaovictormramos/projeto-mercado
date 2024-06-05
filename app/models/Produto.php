@@ -32,7 +32,7 @@ class Produto
                 JOIN tb_pjm_marca marca ON marca.marca_id = produto.marca_id";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
-        $produtos = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $produtos = $stmt->fetchAll(\PDO::FETCH_OBJ);
         return $produtos;
     }
 }

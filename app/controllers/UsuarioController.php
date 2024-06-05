@@ -24,4 +24,8 @@ class UsuarioController extends Controller
         $this->view('usuario/minhaslistas');
     }
 
+    public function criarLista()
+    {
+        //$this->view();
+    }
 }

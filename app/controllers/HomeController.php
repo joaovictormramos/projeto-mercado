@@ -12,7 +12,7 @@ class HomeController extends Controller
         }
 
         $produtos = new ProdutoController();
-        $listaprodutos = $produtos->exibirProdutos();
+        $listaprodutos = $produtos->exibirProduto();
 
         $this->view('home', ['nome' => $nome, 'listaprodutos' => $listaprodutos]);
 
