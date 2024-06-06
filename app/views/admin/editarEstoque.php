@@ -6,16 +6,7 @@ $this->layout('master', ['title' => 'Editar estoque']);
 foreach ($estabelecimentoProdutos as $produto) {
     ?><tr>
         <td>
-            <?php echo $produto->produto_produto; ?>
-        </td>
-        <td>
-            <?php echo $produto->marca_nome; ?>
-        </td>
-        <td>
-            <?php echo $produto->produto_medida . $produto->produto_unidademedida ?>
-        </td>
-        <td>
-            R$<?php echo number_format($produto->estabelecimento_produto_preco, 2, ','); ?>
+            <?php echo $produto->produto_produto . ' ' . $produto->marca_nome . ' ' . $produto->produto_medida . $produto->produto_unidademedida . ' R$' . number_format($produto->estabelecimento_produto_preco, 2, ','); ?>
         </td>
     </tr>
 
@@ -38,7 +29,7 @@ foreach ($produtosACadastrar as $cadastrarProduto) {
                 <?php echo $cadastrarProduto->marca_nome; ?>
             </td>
             <td>
-                <?php echo $cadastrarProduto->produto_medida . $cadastrarProduto->produto_unidademedida ?>
+                <?php echo str_replace('.', ',', (string)$cadastrarProduto->produto_medida) . $cadastrarProduto->produto_unidademedida ?>
             </td>
             <td>
                 <input type="hidden" name="estabelecimento_id" value="<?php echo $estabelecimentoId; ?>">
