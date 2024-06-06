@@ -25,26 +25,27 @@ class Produto
         $stmt->execute();
     }
 
-    public function listarProdutos()
+    public function listarProdutos($estabelecimentoId = null)
     {
-        $sql = "SELECT produto.produto_produto, marca.marca_nome, produto.produto_medida, produto.produto_unidademedida
-                FROM tb_pjm_produto produto
-                JOIN tb_pjm_marca marca ON marca.marca_id = produto.marca_id";
-        $stmt = $this->connection->prepare($sql);
-        $stmt->execute();
-        $produtos = $stmt->fetchAll(\PDO::FETCH_OBJ);
-        return $produtos;
-    }
+        $sql = "SELECT produto.produto_produto, marca.marca_nome, produto.produto_medida, produto.produto_unidademedida";
 
-    public function listarProdutosPorEstabelecimento($estabelecimentoId)
-    {
-        $sql = "SELECT produto.produto_produto, marca.marca_nome, produto.produto_medida, produto.produto_unidademedida, esta_prod.estabelecimento_produto_preco
-            FROM tb_pjm_produto produto
-            JOIN tb_pjm_marca marca ON marca.marca_id = produto.marca_id
-            JOIN tb_pjm_estabelecimento_produto esta_prod ON esta_prod.produto_id = produto.produto_id
-            WHERE esta_prod.estabelecimento_id = ?";
+        if ($estabelecimentoId !== null) {
+            $sql .= ", esta_prod.estabelecimento_produto_preco
+                FROM tb_pjm_produto produto
+                JOIN tb_pjm_marca marca ON marca.marca_id = produto.marca_id
+                JOIN tb_pjm_estabelecimento_produto esta_prod ON esta_prod.produto_id = produto.produto_id
+                WHERE esta_prod.estabelecimento_id = ?";
+        } else {
+            $sql .= " FROM tb_pjm_produto produto
+                 JOIN tb_pjm_marca marca ON marca.marca_id = produto.marca_id";
+        }
+
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(1, $estabelecimentoId, \PDO::PARAM_INT);
+
+        if ($estabelecimentoId !== null) {
+            $stmt->bindParam(1, $estabelecimentoId, \PDO::PARAM_INT);
+        }
+
         $stmt->execute();
         $produtos = $stmt->fetchAll(\PDO::FETCH_OBJ);
         return $produtos;

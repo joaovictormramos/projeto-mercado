@@ -8,24 +8,21 @@ class ProdutoController extends Controller
     public function index()
     {
         $produtos = new ProdutoController();
-        $listaprodutos = $produtos->exibirProduto();
+        $listaprodutos = $produtos->listarProdutos();
         $this->view('listarprodutos', ['listaprodutos' => $listaprodutos]);
     }
 
-    public function exibirProduto()
+    public function listarProdutos($estabelecimentoId = null)
     {
         $produtos = new Produto();
-        $listaprodutos = $produtos->listarProdutos();
-        return $listaprodutos;
 
-    }
-
-    public function obterProdutosPorEstabelecimento($estabelecimentoId)
-    {
-        $produtos = new Produto();
-        $listaprodutos = $produtos->listarProdutosPorEstabelecimento($estabelecimentoId);
-        return $listaprodutos;
-
+        if ($estabelecimentoId != null) {
+            $produtos = $produtos->listarProdutos($estabelecimentoId);
+            return $produtos;
+        } else {
+            $produtos = $produtos->listarProdutos();
+            return $produtos;
+        }
     }
 
 }

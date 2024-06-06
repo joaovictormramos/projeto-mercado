@@ -13,4 +13,12 @@ class Estabelecimento
         $this->connection = Connect::connectDatabase();
     }
 
+    public function exibirEstabelecimento()
+    {
+        $sql = "SELECT * FROM tb_pjm_estabelecimento";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        $estabelecimentos = $stmt->fetchAll(\PDO::FETCH_OBJ);
+        return $estabelecimentos;
+    }
 }
