@@ -15,7 +15,7 @@ foreach ($estabelecimentoProdutos as $produto) {
             <?php echo $produto->produto_medida . $produto->produto_unidademedida ?>
         </td>
         <td>
-            R$<?php echo $produto->estabelecimento_produto_preco ?>
+            R$<?php echo number_format($produto->estabelecimento_produto_preco, 2, ','); ?>
         </td>
     </tr>
 

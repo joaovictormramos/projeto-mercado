@@ -13,6 +13,7 @@ class EstabelecimentoProduto
         $this->connection = Connect::connectDatabase();
     }
 
+    //Faz o cadastro do produto no estabelecimento, adicionando o preço do produto.
     public function confirmaCadastro($estabelecimentoId, $produtoId, $produtoPreco)
     {
         $sql = "INSERT INTO tb_pjm_estabelecimento_produto (estabelecimento_id, produto_id, estabelecimento_produto_preco)
