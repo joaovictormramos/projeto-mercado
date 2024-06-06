@@ -14,7 +14,7 @@ foreach ($estabelecimentos as $estabelecimento) {?>
                         <?php echo $estabelecimento->estabelecimento_nome; ?>
                     </td>
                     <td>
-                        <button value="<?php $estabelecimento->estabelecimento_id;?>">Editar estoque</button>
+                        <button name="estabelecimento_id" value="<?php echo $estabelecimento->estabelecimento_id; ?>">Editar estoque</button>
                     </td>
                 </tr>
 <?php }

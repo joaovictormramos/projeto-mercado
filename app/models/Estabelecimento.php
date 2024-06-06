@@ -21,4 +21,5 @@ class Estabelecimento
         $estabelecimentos = $stmt->fetchAll(\PDO::FETCH_OBJ);
         return $estabelecimentos;
     }
+
 }
