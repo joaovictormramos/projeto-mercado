@@ -42,7 +42,8 @@ class EstabelecimentoProdutoController extends Controller
         $estabelecimentoProduto = new EstabelecimentoProduto();
         $estabelecimentoProduto->confirmaCadastro($estabelecimentoId, $produtoId, $precoProduto);
 
-        $this->redirect('../admin/editarestoque');
+        $adminController = new AdminController();
+        $adminController->editarEstoque();
     }
 
 }
