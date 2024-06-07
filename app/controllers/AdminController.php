@@ -26,8 +26,8 @@ class AdminController extends Controller
         $estabelecimentoProdutoController = new EstabelecimentoProdutoController();
         $estabelecimentoProdutos = $estabelecimentoProdutoController->exibirProdutos($estabelecimentoId);
 
-        $produtoController = new Produto();
-        $produtosACadastrar = $produtoController->produtosNaoCadastrados($estabelecimentoId);
+        $estabelecimentoProdutoController = new EstabelecimentoProdutoController();
+        $produtosACadastrar = $estabelecimentoProdutoController->produtosNaoCadastrados($estabelecimentoId);
 
         $this->view('admin/editarEstoque', ['estabelecimentoProdutos' => $estabelecimentoProdutos,
         'produtosACadastrar' => $produtosACadastrar, 'estabelecimentoId' => $estabelecimentoId]);

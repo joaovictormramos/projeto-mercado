@@ -26,48 +26,15 @@ class Produto
         $stmt->execute();
     }
 
-    //método lista produtos recebendo ou não um parâmetro (id do estabelecimento). 
-    //Se vazio, traz todos os produtos, senão traz produtos do estabelecimento passado. 
-    public function listarProdutos($estabelecimentoId = null)
+    //método lista todos os produtos
+    public function listarProdutos()
     {
-        $sql = "SELECT produto.produto_id, produto.produto_produto, marca.marca_nome, produto.produto_medida, produto.produto_unidademedida";
-
-        if ($estabelecimentoId !== null) {
-            $sql .= ", esta_prod.estabelecimento_produto_preco
-                FROM tb_pjm_produto produto
-                JOIN tb_pjm_marca marca ON marca.marca_id = produto.marca_id
-                JOIN tb_pjm_estabelecimento_produto esta_prod ON esta_prod.produto_id = produto.produto_id
-                WHERE esta_prod.estabelecimento_id = (?)";
-        } else {
-            $sql .= " FROM tb_pjm_produto produto
-                 JOIN tb_pjm_marca marca ON marca.marca_id = produto.marca_id";
-        }
-
+        $sql = "SELECT produto.produto_id, produto.produto_produto, marca.marca_nome, produto.produto_medida, produto.produto_unidademedida
+                FROM tb_pjm_produto produto JOIN tb_pjm_marca marca ON marca.marca_id = produto.marca_id";
         $stmt = $this->connection->prepare($sql);
-
-        if ($estabelecimentoId !== null) {
-            $stmt->bindParam(1, $estabelecimentoId, \PDO::PARAM_INT);
-        }
-
         $stmt->execute();
         $produtos = $stmt->fetchAll(\PDO::FETCH_OBJ);
         return $produtos;
-    }
-
-    //método lista produtos que NÃO estão cadastrados em um estabelecimento recebendo ID do estabelecimento.
-    public function produtosNaoCadastrados($estabelecimentoId)
-    {
-        $sql = "SELECT produto.produto_id, produto.produto_produto, marca.marca_nome, produto.produto_medida, produto.produto_unidademedida
-                FROM tb_pjm_produto produto JOIN tb_pjm_marca marca 
-                ON marca.marca_id = produto.marca_id
-                WHERE NOT EXISTS (SELECT 1 FROM tb_pjm_estabelecimento_produto esta_prod
-                WHERE esta_prod.produto_id = produto.produto_id
-                AND esta_prod.estabelecimento_id = (?))";
-        $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(1, $estabelecimentoId, \PDO::PARAM_INT);
-        $stmt->execute();
-        $produtosNaoCadastrados = $stmt->fetchAll(\PDO::FETCH_OBJ);
-        return $produtosNaoCadastrados;
     }
 
     //retorna os dados de um único produto.
