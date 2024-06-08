@@ -1,8 +1,7 @@
 <?php
-session_start();
 $this->layout('master', ['title' => 'Perfil do usuário']);
-
 ?>
+
 <h1>Bem vindo, <?php echo $nome ?></h1>
 <h4>Página Perfil do usuário</h4>
 

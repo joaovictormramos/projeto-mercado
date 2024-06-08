@@ -1,5 +1,4 @@
 <?php
-session_start();
 $this->layout('master', ['title' => 'Home - SupportMercado']);
 
 ?>
@@ -14,12 +13,12 @@ $this->layout('master', ['title' => 'Home - SupportMercado']);
     echo '<a href="auth/login">Login</a>' . ' ' . '<a href="auth/cadastrar">Cadastrar</a>';
 }
 
-if (empty($listaprodutos)) {
+if (empty($produtos)) {
     echo ' vazio';
 } else {
-    foreach ($listaprodutos as $produto) {
+    foreach ($produtos as $produto) {
         echo '<div>' . $produto->produto_produto . ' ' . $produto->marca_nome . ' '
-        . $produto->produto_medida . $produto->produto_unidademedida;
+        .  str_replace('.', ',', (string)$produto->produto_medida) . $produto->produto_unidademedida;
     }
 }
 ?>

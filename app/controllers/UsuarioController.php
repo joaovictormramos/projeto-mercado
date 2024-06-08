@@ -26,6 +26,13 @@ class UsuarioController extends Controller
 
     public function criarLista()
     {
-        //$this->view();
+        $produtosController = new ProdutoController();
+        $produtos = $produtosController->listarProdutos();
+        $this->view('usuario/criarLista', ['produtos' => $produtos]);
+    }
+
+    public function testecadastro()
+    {
+        echo 'Olá';
     }
 }

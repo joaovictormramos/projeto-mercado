@@ -7,14 +7,15 @@ class HomeController extends Controller
     {
         session_start();
 
-        if ($_SESSION['logado'] == true) {
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
             $nome = $_SESSION['usuario_nome'];
+            $produtosController = new ProdutoController();
+            $produtos = $produtosController->listarProdutos();
+            $this->view('home', ['nome' => $nome, 'produtos' => $produtos]);
+        } else {
+            $produtosController = new ProdutoController();
+            $produtos = $produtosController->listarProdutos();
+            $this->view('home', ['produtos' => $produtos]);
         }
-
-        $produtos = new ProdutoController();
-        $listaprodutos = $produtos->exibirProduto();
-
-        $this->view('home', ['nome' => $nome, 'listaprodutos' => $listaprodutos]);
-
     }
 }
