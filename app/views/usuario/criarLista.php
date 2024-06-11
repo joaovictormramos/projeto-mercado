@@ -1,27 +1,28 @@
 <?php
-session_start();
 $this->layout('master', ['title' => 'Criar lista']);
-
 ?>
-<h1>SupportMercado</h1>
-<h4>Página Criar lista</h4>
 
-<form action="" method="post">
-    <label for="listaNome">Nome da lista</label>
-    <input type="text">
-    <label for="data">Agendar lista</label>
-    <input type="date" name="data" id="">
-</form>
+<h1>SupportMercado</h1>
+<h4 id="titulo">Página Criar lista</h4>
+
 <a href="perfil">Voltar</a>
 
-<form action="testecadastro" method="post">
+<form action="criarlista" method="post">
+    <input type="hidden" name="usuarioId" value="<?php echo $_SESSION['usuario_id']; ?>">
+
+    <label for="listaNome">Nome da lista</label>
+    <input type="text" name="listaNome">
+
+    <label for="data">Agendar lista</label>
+    <input type="date" name="data" id="">
+
 <table>
 <?php
 foreach ($produtos as $produto) {?>
     <tr>
         <td>
-            <?php echo $produto->produto_produto . ' ' . $produto->marca_nome . ' ' . str_replace('.', ',', (string)$produto->produto_medida) . $produto->produto_unidademedida; ?>
-            <input type="number" name="qtdProduto" value=" <?php echo $produto->produto_id ?> ">
+            <?php echo $produto->produto_produto . ' ' . $produto->marca_nome . ' ' . str_replace('.', ',', (string) $produto->produto_medida) . $produto->produto_unidademedida; ?>
+            <input type="number" name="<?php echo $produto->produto_id; ?>" value="0">
         </td>
     </tr>
 <?php

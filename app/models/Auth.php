@@ -27,7 +27,7 @@ class Auth
 
     public function login($email, $senha)
     {
-        $sql = "SELECT usuario_senha, usuario_nome_completo FROM tb_pjm_usuario
+        $sql = "SELECT usuario_senha, usuario_nome_completo, usuario_id FROM tb_pjm_usuario
         WHERE usuario_email = (?) LIMIT 1";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $email, \PDO::PARAM_STR);
@@ -43,6 +43,7 @@ class Auth
             $_SESSION['usuario_nome'] = $nome[0] . ' ' . $nome[1];
             $_SESSION['usuario_email'] = $email;
             $_SESSION['logado'] = true;
+            $_SESSION['usuario_id'] = $usuario->usuario_id;
             return true;
         }
     }
