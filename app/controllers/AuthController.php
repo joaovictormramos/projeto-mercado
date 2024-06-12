@@ -46,9 +46,8 @@ class AuthController extends Controller
 
     public function login()
     {
+        session_start();
         $auth = new Auth();
-
-        $this->view('auth/login');
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['email']) || empty($_POST['senha'])) {
@@ -59,13 +58,14 @@ class AuthController extends Controller
                 $senha = $_POST['senha'];
 
                 if ($auth->login($email, $senha) == true) {
-                    session_start();
+
                     $nome = $_SESSION['usuario_nome'];
                     $this->view('home', ['nome' => $nome]);
                     $this->redirect('/');
                 }
             }
         }
+        $this->view('auth/login');
     }
 
     public function logout()

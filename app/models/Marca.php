@@ -20,4 +20,19 @@ class Marca
         $marcas = $stmt->fetchAll(\PDO::FETCH_OBJ);
         return $marcas;
     }
+
+    public function buscarMarca($palavra)
+    {
+        $sql = "SELECT marca.marca_nome, marca.marca_id FROM tb_pjm_marca marca WHERE marca.marca_nome ILIKE (?)";
+        if (!empty($palavra)) {
+            $palavra = "%" . $palavra . "%";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(1, $palavra, \PDO::PARAM_STR);
+            $stmt->execute();
+            $buscaResult = $stmt->fetchAll(\PDO::FETCH_OBJ);
+            return $buscaResult;
+
+        }
+
+    }
 }

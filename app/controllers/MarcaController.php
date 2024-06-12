@@ -11,4 +11,11 @@ class MarcaController extends Controller
         $marcas = $marcaModel->getMarcas();
         return $marcas;
     }
+
+    public function buscarMarca($palavra)
+    {
+        $produto = new Marca();
+        $buscaResult = $produto->buscarMarca($palavra);
+        return $buscaResult;
+    }
 }

@@ -36,7 +36,8 @@ class Lista
             if ($listaNome !== null) {
                 $stmt->bindParam(3, $listaNome, \PDO::PARAM_STR);
             } else {
-                $stmt->bindValue(3, null, \PDO::PARAM_NULL);
+                $listaNome = 'Lista ' . $result->proximo_usuario_lista_id;
+                $stmt->bindValue(3, $listaNome, \PDO::PARAM_STR);
             }
 
             if ($agendamento !== null) {

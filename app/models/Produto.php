@@ -48,4 +48,21 @@ class Produto
         $produto = $stmt->fetch(\PDO::FETCH_OBJ);
         return $produto;
     }
+
+    public function buscarProduto($palavra)
+    {
+        $sql = "SELECT produto.produto_produto, marca.marca_nome, produto.produto_medida, produto.produto_unidademedida
+                FROM tb_pjm_produto produto JOIN tb_pjm_marca marca ON marca.marca_id = produto.marca_id
+                WHERE produto.produto_produto ILIKE (?)";
+        if (!empty($palavra)) {
+            $palavra = "%" . $palavra . "%";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(1, $palavra, \PDO::PARAM_STR);
+            $stmt->execute();
+            $buscaResult = $stmt->fetchAll(\PDO::FETCH_OBJ);
+            return $buscaResult;
+
+        }
+
+    }
 }
