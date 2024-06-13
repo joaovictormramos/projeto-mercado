@@ -10,13 +10,40 @@ $this->layout('master', ['title' => 'Home - SupportMercado']);
 } else {
     echo '<a href="auth/login">Login</a>' . ' ' . '<a href="auth/cadastrar">Cadastrar</a>';
 }
+?>
 
-if (empty($produtos)) {
-    echo ' vazio';
-} else {
-    foreach ($produtos as $produto) {
-        echo '<div>' . $produto->produto_produto . ' ' . $produto->marca_nome . ' '
-        . str_replace('.', ',', (string) $produto->produto_medida) . $produto->produto_unidademedida;
-    }
+<table class="table">
+  <tbody>
+    <tr>
+      <th scope="row">Mercearia</th>
+      <td></td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">Bebida</th>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row">Limpeza</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">Laticínios</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+<?php
+foreach ($produtos as $produto) {
+    echo '<div>' . $produto->produto_produto . ' ' . $produto->marca_nome . ' '
+    . str_replace('.', ',', (string) $produto->produto_medida) . $produto->produto_unidademedida;
 }
 ?>
+</table>

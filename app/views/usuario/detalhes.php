@@ -26,5 +26,5 @@ foreach ($listaDesc as $produto) {?>
 ?>
     </table>
 
-    <a href="../minhaslistas">Retornar</a>
+    <a class="btn btn-primary" href="../minhaslistas">Retornar</a>
 </div>
