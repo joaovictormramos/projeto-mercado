@@ -12,13 +12,13 @@ class HomeController extends Controller
         if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
             $nome = $_SESSION['usuario_nome'];
             $produtosController = new ProdutoController();
-            $produtos = $produtosController->listarProdutos();
-            $this->view('home', ['nome' => $nome, 'produtos' => $produtos]);
+            $produtosPorSetor = $produtosController->listarProdutos();
+            $this->view('home', ['nome' => $nome, 'produtosPorSetor' => $produtosPorSetor]);
 
         } else {
             $produtosController = new ProdutoController();
-            $produtos = $produtosController->listarProdutos();
-            $this->view('home', ['produtos' => $produtos]);
+            $produtosPorSetor = $produtosController->listarProdutos();
+            $this->view('home', ['produtosPorSetor' => $produtosPorSetor]);
         }
     }
 }

@@ -7,18 +7,26 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        $produtos = new Produto();
-        $listaprodutos = $produtos->listarProdutos();
-        $this->view('produtos', ['listaprodutos' => $listaprodutos]);
+        $produtos = new Produto(); 
+        $listaProdutos = $produtos->listarProdutos();
+        $this->view('produtos', ['listaprodutos' => $listaProdutos]);
     }
 
     //Lista todos os produtos utiliando método do model Produto.
     public function listarProdutos()
     {
         $produtos = new Produto();
-        $produtos = $produtos->listarProdutos();
-        return $produtos;
+        $listaProdutos = $produtos->listarProdutos();
+        
+        $produtosPorSetor = [];
 
+        foreach ($listaProdutos as $produto) {
+            if (!isset($produtosPorSetor[$produto->setor_nome])) {
+                $produtosPorSetor[$produto->setor_nome] = [];
+            }
+            $produtosPorSetor[$produto->setor_nome][] = $produto;
+        }
+        return $produtosPorSetor;
     }
 
     //Retorna os dados do produto passado como parâmetro seu ID.

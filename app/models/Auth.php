@@ -35,7 +35,6 @@ class Auth
         $usuario = $stmt->fetch(\PDO::FETCH_OBJ);
 
         if (!$usuario || !password_verify($senha, $usuario->usuario_senha)) {
-            echo 'Falha na autenticação.';
             return false;
         } else {
             session_start();

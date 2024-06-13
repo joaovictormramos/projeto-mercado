@@ -5,6 +5,7 @@ use app\models\Auth;
 
 class AuthController extends Controller
 {
+    //cadastrar usuário
     public function cadastrar()
     {
         $auth = new Auth();
@@ -44,6 +45,7 @@ class AuthController extends Controller
         }
     }
 
+    //login usuário
     public function login()
     {
         session_start();
@@ -51,23 +53,35 @@ class AuthController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST['email']) || empty($_POST['senha'])) {
-                echo 'Campos não preenchidos.';
+                $erro = 'Campos não preenchidos.';
 
             } else {
                 $email = $_POST['email'];
                 $senha = $_POST['senha'];
 
                 if ($auth->login($email, $senha) == true) {
-
                     $nome = $_SESSION['usuario_nome'];
-                    $this->view('home', ['nome' => $nome]);
+
+                    $produtosController = new ProdutoController();
+                    $produtosPorSetor = $produtosController->listarProdutos();
+
+                    $this->view('home', ['nome' => $nome, 'produtosPorSetor' => $produtosPorSetor]);
                     $this->redirect('/');
+                    return;
+                    
+                } else {
+                    $erro = 'E-mail ou senha incorretos.';
                 }
             }
+            $erroHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';
+            $this->view('auth/login', ['erro' => $erroHtml]);
+        
+        } else {
+            $this->view('auth/login');
         }
-        $this->view('auth/login');
     }
 
+    //sair
     public function logout()
     {
         session_start();

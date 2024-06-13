@@ -5,6 +5,11 @@ use app\models\Marca;
 
 class MarcaController extends Controller
 {
+    public function index()
+    {
+        $marcas = $this->getMarcas();
+        $this->view('marcas', ['marcas' => $marcas]);
+    }
     public function getMarcas()
     {
         $marcaModel = new Marca();
