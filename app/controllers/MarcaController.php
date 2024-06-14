@@ -23,4 +23,5 @@ class MarcaController extends Controller
         $buscaResult = $produto->buscarMarca($palavra);
         return $buscaResult;
     }
+    
 }

@@ -3,7 +3,7 @@ $this->layout('master', ['title' => 'Produtos - SupportMercado']);
 ?>
 
 <div class="container">
-<h1>Resultado da busca</h1>
+<h2 class="text-start">Resultado da busca</h2>
 
 <?php
 foreach ($resultado['marcas'] as $marca) {

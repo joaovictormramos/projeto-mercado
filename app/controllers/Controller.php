@@ -18,4 +18,9 @@ abstract class Controller
     {
         header('location: ' . $path);
     }
+
+    static function redirectController($path)
+    {
+        header('location: ' . $path);
+    }
 }

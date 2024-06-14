@@ -2,6 +2,7 @@
 namespace app\models;
 
 use app\config\Connect;
+use app\models\Produto;
 
 class Marca
 {
@@ -35,4 +36,5 @@ class Marca
         }
 
     }
+
 }

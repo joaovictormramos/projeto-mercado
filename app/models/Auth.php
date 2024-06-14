@@ -13,6 +13,7 @@ class Auth
         $this->connection = Connect::connectDatabase();
     }
 
+    //cadastro usuário
     public function cadastrarUsuario($nome, $cpf, $email, $senha)
     {
         $sql = "INSERT INTO tb_pjm_usuario(usuario_nome_completo, usuario_cpf, usuario_email, usuario_senha)
@@ -107,6 +108,11 @@ class Auth
         }
         return true;
 
+    }
+
+    public function cadastroAdmin()
+    {
+        
     }
 
 }

@@ -1,3 +1,4 @@
+<?php session_start();?>
 <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a class="logo" href="/">
@@ -23,12 +24,19 @@
             </a>
             <ul class="dropdown-menu text-small" aria-labelledby="dropdownMenuButton">
                 <li><a class="dropdown-item" href="/usuario/criarlista">Nova lista...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="/usuario/minhaslistas">Minhas listas</a></li>
                 <li><a class="dropdown-item" href="/usuario/perfil">Perfil</a></li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>
+                <?php if (isset($_SESSION['logado']) && $_SESSION['logado'] == true) {?>
                 <li><a class="dropdown-item" href="/auth/logout">Sair</a></li>
+                <?php } else {?>
+                <li><a class="dropdown-item" href="/auth/cadastrar">Cadastrar</a></li>
+                <li><a class="dropdown-item" href="/auth/login">Login</a></li>
+                <?php
+}
+?>
             </ul>
         </div>
     </div>

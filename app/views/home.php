@@ -4,18 +4,18 @@ $this->layout('master', ['title' => 'Home - SupportMercado']);
 
 <div class="container">
 
-  <?php foreach ($produtosPorSetor as $setorNome => $produtos) { ?>
+  <?php foreach ($produtosPorSetor as $setorNome => $produtos) {?>
   <h3 class="text-start"><?php echo $setorNome; ?></h3>
   <div id="carousel-<?php echo $setorNome; ?>" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <?php
-                $chunks = array_chunk($produtos, 4); // Dividir os produtos em grupos de 3 para cada slide
-                foreach ($chunks as $index => $chunk) {
-                    $activeClass = $index === 0 ? 'active' : '';
-                ?>
+$chunks = array_chunk($produtos, 4); // Dividir os produtos em grupos de 4 para cada slide
+    foreach ($chunks as $index => $chunk) {
+        $activeClass = $index === 0 ? 'active' : '';
+        ?>
       <div class="carousel-item <?php echo $activeClass; ?>">
         <div class="row justify-content-center">
-          <?php foreach ($chunk as $produto) { ?>
+          <?php foreach ($chunk as $produto) {?>
           <div class="col-md-3">
             <!-- Alterado para col-md-3 -->
             <div class="card mb-4 shadow-sm">
@@ -23,8 +23,9 @@ $this->layout('master', ['title' => 'Home - SupportMercado']);
                 alt="Thumbnail [100%x225]" style="height: 150px;  object-fit: contain;">
               <div class="card-body">
                 <p class="card-text">
-                  <?php echo $produto->produto_produto . ' ' . $produto->marca_nome . ' ' . str_replace('.', ',', (string)$produto->produto_medida) . $produto->produto_unidademedida; ?>
+                  <?php echo $produto->produto_produto . ' ' . $produto->marca_nome . ' ' . str_replace('.', ',', (string) $produto->produto_medida) . $produto->produto_unidademedida; ?>
                 </p>
+                <h4>R$</h4>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-secondary">Adicionar</button>
@@ -34,21 +35,30 @@ $this->layout('master', ['title' => 'Home - SupportMercado']);
               </div>
             </div>
           </div>
-          <?php } ?>
+          <?php }?>
         </div>
       </div>
-      <?php } ?>
+      <?php
+}?>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<?php echo $setorNome; ?>"
-      data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<?php echo $setorNome; ?>" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carousel-<?php echo $setorNome; ?>"
-      data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel-<?php echo $setorNome; ?>" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  <?php } ?>
+  <?php }?>
 </div>
+
+<!-- #####-----BOTÃO DE INCREMENTO E DECREMENTO-- APLICAR DEPOIS-----#####
+<div class="container">
+  <div class="quantity-container mt-5">
+    <div class="quantity-button" id="decrease">-</div>
+    <input type="number" class="quantity-input" id="quantity" value="0" min="0">
+    <div class="quantity-button" id="increase">+</div>
+  </div>
+</div>
+-->

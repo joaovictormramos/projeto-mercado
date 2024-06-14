@@ -68,14 +68,14 @@ class AuthController extends Controller
                     $this->view('home', ['nome' => $nome, 'produtosPorSetor' => $produtosPorSetor]);
                     $this->redirect('/');
                     return;
-                    
+
                 } else {
                     $erro = 'E-mail ou senha incorretos.';
                 }
             }
             $erroHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';
             $this->view('auth/login', ['erro' => $erroHtml]);
-        
+
         } else {
             $this->view('auth/login');
         }
@@ -89,6 +89,19 @@ class AuthController extends Controller
         session_destroy();
         $this->redirect('/');
         exit();
+    }
+
+    public function cadastrarAdmin()
+    {
+        $auth = new Auth();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            var_dump($_POST);
+        }
+
+        else {
+            $this->view('auth/cadastro_admin');
+        }
     }
 
 }

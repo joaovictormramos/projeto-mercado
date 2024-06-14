@@ -7,7 +7,7 @@ $this->layout('master', ['title' => 'Produtos - SupportMercado']);
 
 <?php
 foreach ($marcas as $marca) { ?>
-    <p> <?php echo $marca->marcanome;?> </p>
+    <a href="/marca/detalhes/<?php echo $marca->marca_id; ?>"> <?php echo $marca->marcanome . $marca->marca_id?> </p>
 
 <?php
 }

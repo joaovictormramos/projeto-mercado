@@ -19,5 +19,8 @@
     <footer class="rodape">
         <?=$this->fetch('partials/footer')?>
     </footer>
+
+    <script src="/assets/js/incrementDecrement.js"></script>
+
 </body>
 </html>

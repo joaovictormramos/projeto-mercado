@@ -7,7 +7,6 @@
     flex-wrap: row;
     background-color: greenyellow;
 }
-
 .rodape {
     background-color: greenyellow;
 }
@@ -24,4 +23,57 @@
 
 .nomes {
     color: rgb(0, 0, 0);
+}
+
+.quantity-container {
+    display: flex;
+    align-items: center;
+}
+.quantity-input {
+    width: 60px;
+    text-align: center;
+    border: 1px solid #ced4da;
+    height: 38px;
+    padding: 0;
+}
+.quantity-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid #ced4da;
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+#quantity {
+    -moz-appearance: textfield;
+}
+
+ul {
+    padding-left: 0; /* Remover o padding padrão da lista */
+}
+
+.listas {
+    margin-bottom: 5px; /* Adicionar um espaço entre os itens da lista */
+    list-style-type: none;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #FF0000; /* Substitua pela cor desejada */
+}
+
+/* Altera a cor das setas ativas (quando o mouse passa sobre elas) */
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+    background-color: #00FF00; /* Substitua pela cor desejada */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    /* Ajuste a distância lateral conforme necessário */
+    margin-left: -200px; /* Exemplo de ajuste para a esquerda */
+    margin-right: -200px; /* Exemplo de ajuste para a direita */
 }

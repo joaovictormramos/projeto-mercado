@@ -29,9 +29,9 @@ class Produto
     //método lista todos os produtos
     public function listarProdutos()
     {
-        $sql = "SELECT produto.produto_id, produto.produto_produto, marca.marca_nome, produto.produto_medida, 
+        $sql = "SELECT produto.produto_id, produto.produto_produto, marca.marca_nome, produto.produto_medida,
                 produto.produto_unidademedida, setor.setor_nome, produto.produto_caminho_img
-                FROM tb_pjm_produto produto 
+                FROM tb_pjm_produto produto
                 JOIN tb_pjm_marca marca ON marca.marca_id = produto.marca_id
                 JOIN tb_pjm_setor setor ON setor.setor_id = produto.setor_id";
         $stmt = $this->connection->prepare($sql);
@@ -68,4 +68,5 @@ class Produto
         }
 
     }
+
 }
