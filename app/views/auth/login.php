@@ -1,5 +1,6 @@
 <?php
-$this->layout('master', ['title' => 'Entrar - SupportMercado'])
+$this->layout('master', ['title' => 'Entrar - SupportMercado']);
+$erro = null;
 ?>
 <br>
 <div class="container d-flex justify-content-center align-items-center">
@@ -18,7 +19,9 @@ $this->layout('master', ['title' => 'Entrar - SupportMercado'])
             
             <br>
             
-            <?php echo $erro ?>
+            <?php if (!is_null($erro)) {
+                echo $erro;
+            } ?>
 
             <div class="checkbox mb-3">
                 <label>

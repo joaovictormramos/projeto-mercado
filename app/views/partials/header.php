@@ -1,4 +1,3 @@
-<?php session_start();?>
 <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a class="logo" href="/">
@@ -11,10 +10,10 @@
             <li><a href="/produto" class="nav-link px-2 link-body-emphasis">Produtos</a></li>
         </ul>
 
-        <form class="w-30 me-3" role="search" action="/buscar/result" method="GET">
-            <input name="palavra-chave" type="search" class="form-control form-control-dark"
-                placeholder="Buscar produto ou marca..." aria-label="Search">
-        </form>
+            <form class="w-30 me-3" role="search" action="/buscar/result" method="GET">
+                <input name="palavra-chave" type="search" class="form-control form-control-dark"
+                    placeholder="Buscar produto ou marca..." aria-label="Search">
+            </form>
 
         <div class="dropdown text-end">
             <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
@@ -23,9 +22,14 @@
                     class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small" aria-labelledby="dropdownMenuButton">
+            <?php if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true) { ?>
+                <li><a class="dropdown-item" href="/admin/index">Painel Administrativo</a></li>
+                <?php } else { ?>
                 <li><a class="dropdown-item" href="/usuario/criarlista">Nova lista...</a></li>
                 <li><a class="dropdown-item" href="/usuario/minhaslistas">Minhas listas</a></li>
                 <li><a class="dropdown-item" href="/usuario/perfil">Perfil</a></li>
+                
+                <?php } ?>
                 <li>
                     <hr class="dropdown-divider">
                 </li>

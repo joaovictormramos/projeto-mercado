@@ -52,13 +52,3 @@ $chunks = array_chunk($produtos, 4); // Dividir os produtos em grupos de 4 para 
   </div>
   <?php }?>
 </div>
-
-<!-- #####-----BOTÃO DE INCREMENTO E DECREMENTO-- APLICAR DEPOIS-----#####
-<div class="container">
-  <div class="quantity-container mt-5">
-    <div class="quantity-button" id="decrease">-</div>
-    <input type="number" class="quantity-input" id="quantity" value="0" min="0">
-    <div class="quantity-button" id="increase">+</div>
-  </div>
-</div>
--->

@@ -20,8 +20,8 @@ class UsuarioController extends Controller
         }
 
         $dadosUsuario = [
-            'nome' => $_SESSION['usuario_nome'],
-            'email' => $_SESSION['usuario_email'],
+            'nome' => $_SESSION['nome'],
+            'email' => $_SESSION['email'],
         ];
         $this->view('usuario/perfil', $dadosUsuario);
     }
@@ -62,7 +62,7 @@ class UsuarioController extends Controller
             session_start();
         }
 
-        $usuarioId = $_SESSION['usuario_id'];
+        $usuarioId = $_SESSION['id'];
         $listaController = new ListaController();
 
         $minhasListas = $listaController->minhasListas($usuarioId);

@@ -50,8 +50,10 @@ class AuthController extends Controller
     {
         session_start();
         $auth = new Auth();
+        $erro = null;
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
             if (empty($_POST['email']) || empty($_POST['senha'])) {
                 $erro = 'Campos não preenchidos.';
 
@@ -59,25 +61,29 @@ class AuthController extends Controller
                 $email = $_POST['email'];
                 $senha = $_POST['senha'];
 
-                if ($auth->login($email, $senha) == true) {
-                    $nome = $_SESSION['usuario_nome'];
+                if ($auth->isAdmin($email)) {
+                    $auth->loginAdmin($email, $senha);
+                    $this->redirect('/admin/index');
+                    return;
 
-                    $produtosController = new ProdutoController();
-                    $produtosPorSetor = $produtosController->listarProdutos();
-
-                    $this->view('home', ['nome' => $nome, 'produtosPorSetor' => $produtosPorSetor]);
+                } else if ($auth->login($email, $senha) == true) {
+                    $logado = $_SESSION['logado'];
+                    $this->view('/partials/header', ['logado' => $logado]);
                     $this->redirect('/');
                     return;
 
                 } else {
                     $erro = 'E-mail ou senha incorretos.';
-                }
-            }
-            $erroHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';
-            $this->view('auth/login', ['erro' => $erroHtml]);
 
+                }
+
+                $erroHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';
+                $this->view('auth/login', ['erro' => $erroHtml]);
+
+            }
         } else {
             $this->view('auth/login');
+
         }
     }
 
@@ -96,10 +102,36 @@ class AuthController extends Controller
         $auth = new Auth();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            var_dump($_POST);
-        }
+            if (empty($_POST['nome']) || empty($_POST['email']) || empty($_POST['cpf']) || empty($_POST['senha'])) {
+                $erro = 'Preencha todos os campos.';
 
-        else {
+            } else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                $erro = 'E-mail inválido.';
+
+            } else if (!$auth->validaCPF($_POST['cpf'])) {
+                $erro = 'CPF inválido.';
+
+            } else if ($_POST['senha'] != $_POST['confirmarSenha']) {
+                $erro = 'Senhas não coincidem.';
+
+            } else {
+                $isAdmin = $_POST['is_admin'];
+                $caracteresEspeciais = '/[^a-zA-Z\sçÇáéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕàÀüÜ]/u';
+                $nome = preg_replace($caracteresEspeciais, '', trim(ucwords($_POST['nome'])));
+                $cpf = trim($_POST['cpf']);
+                $email = trim($_POST['email']);
+                $senha = trim(password_hash($_POST['senha'], PASSWORD_DEFAULT));
+
+                $auth->cadastrarAdmin($isAdmin, $nome, $cpf, $email, $senha);
+
+                $this->redirect('/');
+
+            }
+
+            $erroHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';
+            $this->view('auth/cadastro_admin', ['erro' => $erroHtml]);
+
+        } else {
             $this->view('auth/cadastro_admin');
         }
     }

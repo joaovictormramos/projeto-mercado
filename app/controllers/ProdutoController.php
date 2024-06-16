@@ -43,4 +43,5 @@ class ProdutoController extends Controller
         $buscaResult = $produto->buscarProduto($palavra);
         return $buscaResult;
     }
+
 }

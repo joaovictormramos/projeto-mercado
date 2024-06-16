@@ -14,15 +14,16 @@ class Produto
     }
 
     //Cadastra produtos.
-    public function cadastrarProduto($produto, $marca_id, $medida, $unidadeMedida)
+    public function cadastrarProduto($produto, $marca_id, $medida, $unidadeMedida, $produtoUrl)
     {
-        $sql = "INSERT INTO tb_pjm_produto(produto_produto, marca_id, produto_medida, produto_unidadeMedida)
-                VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO tb_pjm_produto(produto_produto, marca_id, produto_medida, produto_unidadeMedida, produto_caminho_img)
+                VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $produto, \PDO::PARAM_STR);
         $stmt->bindParam(2, $marca_id, \PDO::PARAM_INT);
         $stmt->bindParam(3, $medida, \PDO::PARAM_STR);
         $stmt->bindParam(4, $unidadeMedida, \PDO::PARAM_STR);
+        $stmt->bindParam(5, $produtoUrl, \PDO::PARAM_STR);
         $stmt->execute();
     }
 
@@ -30,10 +31,11 @@ class Produto
     public function listarProdutos()
     {
         $sql = "SELECT produto.produto_id, produto.produto_produto, marca.marca_nome, produto.produto_medida,
-                produto.produto_unidademedida, setor.setor_nome, produto.produto_caminho_img
+                produto.produto_unidademedida, setor.setor_nome, setor.setor_id, produto.produto_caminho_img
                 FROM tb_pjm_produto produto
                 JOIN tb_pjm_marca marca ON marca.marca_id = produto.marca_id
-                JOIN tb_pjm_setor setor ON setor.setor_id = produto.setor_id";
+                JOIN tb_pjm_setor setor ON setor.setor_id = produto.setor_id
+                ORDER BY produto.produto_produto";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         $produtos = $stmt->fetchAll(\PDO::FETCH_OBJ);

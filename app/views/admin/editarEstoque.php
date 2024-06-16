@@ -3,7 +3,7 @@ $this->layout('master', ['title' => 'Editar estoque']);
 ?>
 
 <div class="container">
-
+    <h2> <?php echo $nomeEstabelecimento; ?> </h2>
     <table>
         <?php
 foreach ($estabelecimentoProdutos as $produto) {
@@ -19,7 +19,7 @@ foreach ($estabelecimentoProdutos as $produto) {
     </table>
 
     <h4>Cadastrar mais produtos</h1>
-        <form action="../estabelecimentoProduto/cadastrarProdutoEstabelecimento" method="post">
+        <form action="/estabelecimentoProduto/cadastrarProdutoEstabelecimento" method="post">
             <table>
                 <?php
 foreach ($produtosACadastrar as $cadastrarProduto) {

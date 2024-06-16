@@ -1,14 +1,22 @@
 <?php
-namespace app\controllers;
 
-use app\models\Produto;
+namespace app\controllers;
 
 class AdminController extends Controller
 {
     //Chama o painel de administrador.
     public function index()
     {
-        $this->view('admin/painelAdmin');
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
+            $nome = $_SESSION['nome'];
+            $idAdmin = $_SESSION['id'];
+            $isAdmin = $_SESSION['isAdmin'];
+            $this->view('admin/painelAdmin', ['idAdmin' => $idAdmin]);
+        }
     }
 
     //Usa o método exibirEstabelecimentos de EstabelecimentoController para enviar à view gerenciarEstabelecimento todos os estabelecimentos.
@@ -22,16 +30,37 @@ class AdminController extends Controller
     //Usa o método exibirProdutos de EstabelecimentoController para enviar à view editarestoque os produtos do estabelecimento utilizando o id.
     public function editarEstoque()
     {
-        $estabelecimentoId = $_POST['estabelecimento_id'];
+        $idEstabelecimento = $_POST['idEstabelecimento'];
+        $nomeEstabelecimento = $_POST['estabelecimento'];
         $estabelecimentoProdutoController = new EstabelecimentoProdutoController();
-        $estabelecimentoProdutos = $estabelecimentoProdutoController->exibirProdutos($estabelecimentoId);
+        $estabelecimentoProdutos = $estabelecimentoProdutoController->exibirProdutos($idEstabelecimento);
 
         $estabelecimentoProdutoController = new EstabelecimentoProdutoController();
-        $produtosACadastrar = $estabelecimentoProdutoController->produtosNaoCadastrados($estabelecimentoId);
+        $produtosACadastrar = $estabelecimentoProdutoController->produtosNaoCadastrados($idEstabelecimento);
 
-        $this->view('admin/editarEstoque', ['estabelecimentoProdutos' => $estabelecimentoProdutos,
-        'produtosACadastrar' => $produtosACadastrar, 'estabelecimentoId' => $estabelecimentoId]);
+        $this->view('admin/editarEstoque', ['estabelecimentoProdutos' => $estabelecimentoProdutos, 'produtosACadastrar' => $produtosACadastrar, 'estabelecimentoId' => $idEstabelecimento, 'nomeEstabelecimento' => $nomeEstabelecimento]);
 
+    }
+
+    public function gerenciarProduto()
+    {
+        $setores = new SetorController();
+        $setores = $setores->getSetor();
+        $this->view('admin/gerenciarProduto', ['setores' => $setores]);
+    }
+
+    public function editarSetor()
+    {
+        $setorId = $_POST['setorId'];
+        $setorNome = $_POST['setorNome'];
+        $produtoController = new ProdutoController();
+        $produtosPorSetor = $produtoController->listarProdutos();
+        $this->view('/admin/editarSetor', ['setorId' => $setorId, 'setorNome' => $setorNome, 'produtosPorSetor' => $produtosPorSetor]);
+    }
+
+    public function cadastrarProduto()
+    {
+        $this->view('admin/cadastrarproduto');
     }
 
 }
