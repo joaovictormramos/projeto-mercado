@@ -62,9 +62,13 @@ class AuthController extends Controller
                 $senha = $_POST['senha'];
 
                 if ($auth->isAdmin($email)) {
-                    $auth->loginAdmin($email, $senha);
-                    $this->redirect('/admin/index');
-                    return;
+                    if ($auth->loginAdmin($email, $senha) == true) {
+                        $this->redirect('/admin/index');
+                        return;
+                    } else {
+                        $erro = 'E-mail ou senha incorretos.';
+                    }
+                    
 
                 } else if ($auth->login($email, $senha) == true) {
                     $logado = $_SESSION['logado'];

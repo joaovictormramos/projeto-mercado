@@ -1,6 +1,5 @@
 <?php
 $this->layout('master', ['title' => 'Entrar - SupportMercado']);
-$erro = null;
 ?>
 <br>
 <div class="container d-flex justify-content-center align-items-center">
