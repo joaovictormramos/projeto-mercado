@@ -3,8 +3,10 @@ $this->layout('master', ['title' => 'Gerenciar estabelecimento'])
 ?>
 
 <div class="container">
-
     <h1>Gerenciar estabelecimento</h1>
+    <div class="d-flex align-items-center mb-3">
+        <a class="btn btn-danger me-auto" href="javascript:history.back()">Voltar</a>
+    </div>
     <table>
         <?php
 foreach ($estabelecimentos as $estabelecimento) {?>

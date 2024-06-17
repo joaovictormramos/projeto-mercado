@@ -60,7 +60,13 @@ class AdminController extends Controller
 
     public function cadastrarProduto()
     {
-        $this->view('admin/cadastrarproduto');
+        if ($_SERVER['REQUEST_METHOD'] == $_POST) {
+
+        } else {
+            $marcasController = new MarcaController();
+            $marcas = $marcasController->getMarcas();
+            $this->view('admin/cadastrarproduto', ['marcas' => $marcas]);
+        }
     }
 
 }

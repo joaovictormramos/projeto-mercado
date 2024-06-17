@@ -4,6 +4,9 @@ $this->layout('master', ['title' => 'Editar estoque']);
 
 <div class="container">
     <h2> <?php echo $nomeEstabelecimento; ?> </h2>
+    <div class="d-flex align-items-center mb-3">
+        <a class="btn btn-danger me-auto" href="javascript:history.back()">Voltar</a>
+    </div>
     <table>
         <?php
 foreach ($estabelecimentoProdutos as $produto) {

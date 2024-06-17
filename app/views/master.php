@@ -14,8 +14,10 @@
         <?=$this->fetch('partials/header')?>
     </header>
 
-    <?=$this->section('content')?>
-    
+    <main class="main-content">
+        <?=$this->section('content')?>
+    </main>
+        
     <footer class="rodape">
         <?=$this->fetch('partials/footer')?>
     </footer>

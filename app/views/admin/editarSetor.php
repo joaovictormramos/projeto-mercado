@@ -8,6 +8,7 @@ $i = 1;
 <h2><?php echo $setorNome; ?></h2>
 <div class="container">
     <div class="d-flex align-items-center mb-3">
+        <a class="btn btn-danger me-auto" href="javascript:history.back()">Voltar</a>
         <form class="w-25 t-3" role="search" action="" method="">
             <input name="palavra-chave" type="search" class="form-control form-control-dark"
                 placeholder="Buscar produto..." aria-label="Search">
