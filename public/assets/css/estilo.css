@@ -18,24 +18,14 @@ body {
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: row;
-    background-color: greenyellow;
+    background-color: mediumaquamarine;
 }
 .rodape {
-    background-color: greenyellow;
+    background-color: mediumaquamarine;
 }
 
 .logo {
     text-decoration: none;
-}
-
-.setor {
-    color: rgb(255, 255, 255);
-    font-size: 17px;
-    text-decoration: none;
-}
-
-.nomes {
-    color: rgb(0, 0, 0);
 }
 
 .quantity-container {

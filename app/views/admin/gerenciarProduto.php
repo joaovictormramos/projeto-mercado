@@ -3,7 +3,8 @@ $this->layout('master', ['title' => 'Gerenciar produtos']);
 ?>
 
 <div class="container">
-    <h3>Setores</h3>
+    <br>
+    <h4>Setores</h4>
     <div class="d-flex align-items-center mb-3">
         <a class="btn btn-danger me-auto" href="javascript:history.back()">Voltar</a>
     </div>

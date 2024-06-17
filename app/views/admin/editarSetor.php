@@ -1,8 +1,5 @@
 <?php
 $this->layout('master', ['title' => 'Gerenciar produtos']);
-
-$i = 1;
-
 ?>
 
 <h2><?php echo $setorNome; ?></h2>
@@ -20,7 +17,7 @@ $i = 1;
         <tbody>
             <tr>
                 <td class="align-middle">
-                    <h5>#</h5>
+                    <h5>ID</h5>
                 </td>
                 <td class="align-middle">
                     <h5>PRODUTO</h5>
@@ -39,7 +36,7 @@ $i = 1;
                     ?>
             <tr>
                 <td class="align-middle">
-                    <h5><?php echo $i; ?></h5>
+                    <h5><?php echo $produto->produto_id; ?></h5>
                 </td>
                 <td class="align-middle">
                     <h5><?php echo $produtoCompleto; ?></h5>
@@ -76,7 +73,7 @@ $i = 1;
                     </abbr>
                 </td>
             </tr>
-            <?php $i++;
+            <?php
             }
     }
 }?>

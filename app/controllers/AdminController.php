@@ -61,7 +61,7 @@ class AdminController extends Controller
     public function cadastrarProduto()
     {
         if ($_SERVER['REQUEST_METHOD'] == $_POST) {
-
+            var_dump($_POST);
         } else {
             $marcasController = new MarcaController();
             $marcas = $marcasController->getMarcas();
