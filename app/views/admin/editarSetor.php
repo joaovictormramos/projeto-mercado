@@ -1,8 +1,8 @@
 <?php
 $this->layout('master', ['title' => 'Gerenciar produtos']);
 ?>
-
-<h2><?php echo $setorNome; ?></h2>
+<br>
+<h4><?php echo $setorNome; ?></h4>
 <div class="container">
     <div class="d-flex align-items-center mb-3">
         <a class="btn btn-danger me-auto" href="javascript:history.back()">Voltar</a>
@@ -10,7 +10,10 @@ $this->layout('master', ['title' => 'Gerenciar produtos']);
             <input name="palavra-chave" type="search" class="form-control form-control-dark"
                 placeholder="Buscar produto..." aria-label="Search">
         </form>
-        <a class="btn btn-primary ms-auto" href="/admin/cadastrarproduto">Cadastrar novo produto</a>
+        <form class="form ms-auto" action="/admin/cadastrarproduto" method="get">
+            <button class="btn btn-primary ms-auto">Cadastrar novo produto</button>
+            <input type="hidden" name="setorNome" value="<?php echo $setorNome; ?>">
+        </form>
     </div>
     <br>
     <table class="table table-bordered border-primary">

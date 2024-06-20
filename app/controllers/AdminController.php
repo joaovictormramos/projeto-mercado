@@ -60,12 +60,48 @@ class AdminController extends Controller
 
     public function cadastrarProduto()
     {
-        if ($_SERVER['REQUEST_METHOD'] == $_POST) {
-            var_dump($_POST);
-        } else {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $setorNome = $_GET['setorNome'];
             $marcasController = new MarcaController();
             $marcas = $marcasController->getMarcas();
-            $this->view('admin/cadastrarproduto', ['marcas' => $marcas]);
+            $this->view('admin/cadastrarproduto', ['marcas' => $marcas, 'setorNome' => $setorNome]);
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_FILES['imgproduto'])) {
+                var_dump($_POST);
+                $img = $_FILES['imgproduto'];
+                var_dump($img);
+                $name = $img['name'];
+                $pasta = '/assets/images/imagens_produtos';
+            }
+
+        } else {
+            
+        }
+    }
+
+    public function gerenciarMarca()
+    {
+        $marcas = new MarcaController();
+        $marcas = $marcas->getMarcas();
+        $this->view('admin/gerenciarMarca', ['marcas' => $marcas]);
+    }
+
+    public function cadastrarMarca()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $marcaNome = $_POST['marcaNome'];
+            $marcaController = new MarcaController();
+            if ($marcaController->cadastrarMarca($marcaNome)) {
+                $msg = "Marca cadastrada com sucesso.";
+            } else {
+                $msg = "Falha ao cadastrar marca.";
+            }
+            $msgHtml = '<div class="alert alert-danger" role="alert">' . $msg . '</div>';
+            $this->view('admin/gerenciarMarca', ['msgHtml' => $msgHtml]);
+        } else {
+            $this->view('admin/cadastrarMarca');
         }
     }
 

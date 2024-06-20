@@ -58,7 +58,7 @@ ul {
     padding-left: 0; /* Remover o padding padrão da lista */
 }
 
-.listas {
+.listas, li {
     margin-bottom: 5px; /* Adicionar um espaço entre os itens da lista */
     list-style-type: none;
 }

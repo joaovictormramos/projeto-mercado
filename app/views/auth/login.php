@@ -6,7 +6,7 @@ $this->layout('master', ['title' => 'Entrar - SupportMercado']);
     <div class="col-12 col-md-6 col-lg-4">
 
         <form class="form-signin" action="/auth/login" method="post">
-            <img class="mb-4" src="/assets/images/app-images/icon.ico" alt="" width="72" height="72">
+            <img class="mb-4" src="/assets/images/imagens-aplicacao/icon.ico" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Faça login</h1>
 
             <label for="email" class="visually-hidden">Email</label>

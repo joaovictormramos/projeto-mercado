@@ -15,7 +15,7 @@ class Marca
 
     public function getMarcas()
     {
-        $sql = "SELECT marca_id AS marcaid, marca_nome AS marcanome FROM tb_pjm_marca ORDER BY marca_nome";
+        $sql = "SELECT marca_id AS marcaid, marca_nome AS marcanome, marca_caminho_img AS marcaimg FROM tb_pjm_marca ORDER BY marca_nome";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         $marcas = $stmt->fetchAll(\PDO::FETCH_OBJ);
@@ -34,7 +34,14 @@ class Marca
             return $buscaResult;
 
         }
+    }
 
+    public function cadastrarMarca($marcaNome)
+    {
+        $sql = "INSERT INTO tb_pjm_marca (marca_nome) VALUES (?)";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(1, $marcaNome, \PDO::PARAM_STR);
+        $stmt->execute();
     }
 
 }

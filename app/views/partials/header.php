@@ -18,7 +18,7 @@
         <div class="dropdown text-end">
             <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                 data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="/assets/images/app-images/usuario.png" alt="perfil" width="40" height="40"
+                <img src="/assets/images/imagens-aplicacao/usuario.png" alt="perfil" width="40" height="40"
                     class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small" aria-labelledby="dropdownMenuButton">

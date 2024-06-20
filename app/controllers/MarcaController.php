@@ -23,5 +23,11 @@ class MarcaController extends Controller
         $buscaResult = $produto->buscarMarca($palavra);
         return $buscaResult;
     }
+
+    public function cadastrarMarca($marcaNome)
+    {
+        $marca = new Marca();
+        $marca->cadastrarMarca($marcaNome);
+    }
     
 }
