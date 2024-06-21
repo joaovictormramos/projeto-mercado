@@ -4,7 +4,6 @@ $this->layout('master', ['title' => 'Gerenciar marcas']);
 <br>
 <h4>Marcas</h4>
 <div class="container">
-    <?php echo $msgHtml; ?>
     <div class="d-flex align-items-center mb-3">
         <a class="btn btn-danger me-auto" href="javascript:history.back()">Voltar</a>
         <a class="btn btn-primary ms-auto" href="/admin/cadastrarmarca">Cadastrar nova marca</a>
@@ -23,4 +22,5 @@ $this->layout('master', ['title' => 'Gerenciar marcas']);
         </div>
         <?php } ?>
     </div>
+    <?php echo $msgHtml; ?>
 </div>

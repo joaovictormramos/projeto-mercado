@@ -27,7 +27,8 @@ class MarcaController extends Controller
     public function cadastrarMarca($marcaNome)
     {
         $marca = new Marca();
-        $marca->cadastrarMarca($marcaNome);
+        $erro = $marca->cadastrarMarca($marcaNome);
+        return $erro;
     }
     
 }

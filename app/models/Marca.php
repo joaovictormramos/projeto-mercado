@@ -41,7 +41,13 @@ class Marca
         $sql = "INSERT INTO tb_pjm_marca (marca_nome) VALUES (?)";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $marcaNome, \PDO::PARAM_STR);
-        $stmt->execute();
+        try {
+            $stmt->execute();
+        } catch (\PDOException){
+            $erro = "Falha ao cadastrar marca.";
+            return $erro;
+        }
+        
     }
 
 }

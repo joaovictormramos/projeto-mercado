@@ -15,6 +15,6 @@ $this->layout('master', ['title' => 'Cadastrar marca']);
                     <input name="marcaNome" type="text" class="form-control form-control-dark" placeholder="Marca...">
                 </div>
             </div>
-            <button class="btn btn-primary">Cadastrar produto</button>
+            <button class="btn btn-primary">Cadastrar marca</button>
         </form>
 </div>

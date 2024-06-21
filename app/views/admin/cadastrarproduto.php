@@ -19,7 +19,7 @@ $this->layout('master', ['title' => 'Gerenciar produtos']);
                 <select name="marcaId" class="form-control">
                     <option value="">Selecionar...</option>
                     <?php foreach ($marcas as $marca) { ?>
-                    <option value="<?php echo $marca->marcaid; ?>"><?php echo $marca->marcanome; ?></option>
+                        <option value="<?php echo $marca->marcaid; ?>"><?php echo $marca->marcanome; ?></option>
                     <?php } ?>
                 </select>
             </div>
@@ -55,8 +55,6 @@ $this->layout('master', ['title' => 'Gerenciar produtos']);
                 <input accept="image/*" type="file" name="imgproduto" id="" class="form-control">
             </div>
         </div>
-        <input type="hidden" name="marcaNome" value="<?php echo $marca->marcanome; ?>">
-        <input type="hidden" name="setorNome" value="<?php echo $setorNome; ?>">
         <button class="btn btn-primary">Cadastrar produto</button>
     </form>
 </div>

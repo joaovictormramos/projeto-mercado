@@ -85,7 +85,7 @@ class Lista
     public function detalheLista($listaId)
     {
         $sql = "SELECT lista.lista_nome, lista.lista_agendamento, lista.lista_id, produto.produto_produto,
-                marca.marca_nome, produto.produto_medida, produto.produto_unidademedida, itenslista.lista_produto_qtd
+                marca.marca_nome, produto.produto_medida, produto.produto_unidademedida, produto.produto_caminho_img, itenslista.lista_produto_qtd
                 FROM tb_pjm_lista lista
                 JOIN tb_pjm_itens_lista itenslista ON itenslista.lista_id = lista.lista_id
                 JOIN tb_pjm_produto produto ON produto.produto_id = itenslista.produto_id

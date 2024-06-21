@@ -68,8 +68,19 @@ class AdminController extends Controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST)) {
+                $produto = $_POST['produto'];
+                $marcaId = $_POST['marcaId'];
+                $medida = $_POST['medida'];
+                $unidadeMedida = $_POST['unidadeMedida'];
+                $marcaNome = $_POST['marca_nome'][$marcaId];
+                echo $produto . '<br>';
+                echo $marcaId . '<br>';
+                echo $medida . '<br>';
+                echo $unidadeMedida . '<br>';
+                echo $marcaNome . '<br>';
+            }
             if (isset($_FILES['imgproduto'])) {
-                var_dump($_POST);
                 $img = $_FILES['imgproduto'];
                 var_dump($img);
                 $name = $img['name'];
@@ -77,7 +88,7 @@ class AdminController extends Controller
             }
 
         } else {
-            
+
         }
     }
 
@@ -93,12 +104,13 @@ class AdminController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $marcaNome = $_POST['marcaNome'];
             $marcaController = new MarcaController();
-            if ($marcaController->cadastrarMarca($marcaNome)) {
-                $msg = "Marca cadastrada com sucesso.";
+            $erro = $marcaController->cadastrarMarca($marcaNome);
+            if (!empty($erro)) {
+                $msgHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';
             } else {
-                $msg = "Falha ao cadastrar marca.";
+                $msg = "Marca cadastrada com sucesso.";
+                $msgHtml = '<div class="alert alert-success" role="alert">' . $msg . '</div>';
             }
-            $msgHtml = '<div class="alert alert-danger" role="alert">' . $msg . '</div>';
             $this->view('admin/gerenciarMarca', ['msgHtml' => $msgHtml]);
         } else {
             $this->view('admin/cadastrarMarca');
