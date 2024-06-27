@@ -36,11 +36,12 @@ class Marca
         }
     }
 
-    public function cadastrarMarca($marcaNome)
+    public function cadastrarMarca($marcaNome, $marcaImg)
     {
-        $sql = "INSERT INTO tb_pjm_marca (marca_nome) VALUES (?)";
+        $sql = "INSERT INTO tb_pjm_marca (marca_nome, marca_caminho_img) VALUES (?, ?)";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $marcaNome, \PDO::PARAM_STR);
+        $stmt->bindParam(2, $marcaImg, \PDO::PARAM_STR);
         try {
             $stmt->execute();
         } catch (\PDOException){

@@ -82,14 +82,14 @@ class AdminController extends Controller
                     $pasta = '/opt/lampp/htdocs/public/assets/images/imagens_produtos/';
                     $caminhoImg = $pasta . $name . $extensao;
                     move_uploaded_file($img['tmp_name'], $caminhoImg);
-                    
+
                     $pasta = '/assets/images/imagens_produtos/';
                     $caminhoImg = $pasta . $name . $extensao;
                 }
 
                 $newProduto = new ProdutoController();
                 $erro = $newProduto->cadastrarProduto($produto, $marcaId, $medida, $unidadeMedida, $setorId, $caminhoImg);
-                
+
                 if (!empty($erro)) {
                     $msgHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';
                 } else {
@@ -97,9 +97,9 @@ class AdminController extends Controller
                     $msgHtml = '<div class="alert alert-success" role="alert">' . $msg . '</div>';
                 }
                 $this->view('admin/cadastrarproduto', ['msgHtml' => $msgHtml]);
-                
+
             } else {
-            
+
             }
         }
     }
@@ -116,7 +116,24 @@ class AdminController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $marcaNome = $_POST['marcaNome'];
             $marcaController = new MarcaController();
-            $erro = $marcaController->cadastrarMarca($marcaNome);
+
+            if (isset($_FILES)) {
+                $img = $_FILES['imgMarca'];
+                $name = strtolower($marcaNome);
+                $extensao = strtolower('.' . pathinfo($img['name'], PATHINFO_EXTENSION));
+                $pasta = '/opt/lampp/htdocs/public/assets/images/imagens_produtos/' . $name . '/logo/';
+
+                if (!is_dir($pasta)) {
+                    mkdir($pasta, 0777, true);
+                }
+
+                $caminhoImg = $pasta . $name . 'Logo'. $extensao;
+                move_uploaded_file($img['tmp_name'], $caminhoImg);
+
+                $pasta = '/assets/images/imagens_produtos/' . $name . '/logo/' . $name . 'Logo' . $extensao;
+                $erro = $marcaController->cadastrarMarca($marcaNome, $pasta);
+            }
+
             if (!empty($erro)) {
                 $msgHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';
             } else {

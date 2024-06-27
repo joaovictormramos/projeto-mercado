@@ -17,8 +17,8 @@ $this->layout('master', ['title' => 'Cadastrar marca']);
                 </div>
             </div>
             <div class="col-md-5">
-                <label for="imgproduto" class="form-label">Imagem</label>
-                <input accept="image/*" type="file" name="imgproduto" id="" class="form-control">
+                <label for="imgMarca" class="form-label">Imagem</label>
+                <input accept="image/*" type="file" name="imgMarca" id="" class="form-control">
             </div>
             <button class="btn btn-primary">Cadastrar marca</button>
         </form>

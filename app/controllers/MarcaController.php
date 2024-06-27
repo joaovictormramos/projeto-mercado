@@ -24,10 +24,10 @@ class MarcaController extends Controller
         return $buscaResult;
     }
 
-    public function cadastrarMarca($marcaNome)
+    public function cadastrarMarca($marcaNome, $marcaImg)
     {
         $marca = new Marca();
-        $erro = $marca->cadastrarMarca($marcaNome);
+        $erro = $marca->cadastrarMarca($marcaNome, $marcaImg);
         return $erro;
     }
     
