@@ -14,17 +14,23 @@ class Produto
     }
 
     //Cadastra produtos.
-    public function cadastrarProduto($produto, $marca_id, $medida, $unidadeMedida, $produtoUrl)
+    public function cadastrarProduto($produto, $marca_id, $medida, $unidadeMedida, $setorId, $caminhoImg)
     {
-        $sql = "INSERT INTO tb_pjm_produto(produto_produto, marca_id, produto_medida, produto_unidadeMedida, produto_caminho_img)
-                VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO tb_pjm_produto(produto_produto, marca_id, produto_medida, produto_unidadeMedida, setor_id, produto_caminho_img)
+                VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $produto, \PDO::PARAM_STR);
         $stmt->bindParam(2, $marca_id, \PDO::PARAM_INT);
         $stmt->bindParam(3, $medida, \PDO::PARAM_STR);
         $stmt->bindParam(4, $unidadeMedida, \PDO::PARAM_STR);
-        $stmt->bindParam(5, $produtoUrl, \PDO::PARAM_STR);
-        $stmt->execute();
+        $stmt->bindParam(5, $setorId, \PDO::PARAM_INT);
+        $stmt->bindParam(6, $caminhoImg, \PDO::PARAM_STR);
+        try {
+            $stmt->execute();
+        } catch (\PDOException){
+            $erro = "Falha ao cadastrar produto.";
+            return $erro;
+        }
     }
 
     //método lista todos os produtos

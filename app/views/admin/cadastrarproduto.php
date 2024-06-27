@@ -6,8 +6,9 @@ $this->layout('master', ['title' => 'Gerenciar produtos']);
     <br>
     <h4>Cadastrar produto</h4>
     <div class="d-flex align-items-center mb-3">
-        <a class="btn btn-danger me-auto" href="javascript:history.back()">Voltar</a>
+        <a class="btn btn-danger me-auto" href="/admin/gerenciarProduto">Voltar</a>
     </div>
+    <?php echo $msgHtml; ?>
     <form enctype="multipart/form-data" action="/admin/cadastrarproduto" method="post" class="w-100">
         <div class="mb-1">
             <div class="col-md-5">
@@ -54,6 +55,8 @@ $this->layout('master', ['title' => 'Gerenciar produtos']);
                 <label for="imgproduto" class="form-label">Imagem</label>
                 <input accept="image/*" type="file" name="imgproduto" id="" class="form-control">
             </div>
+            <input type="hidden" name="setorId" value="<?php echo $setorId; ?>">
+            <input type="hidden" name="setorNome" value="<?php echo $setorNome; ?>">
         </div>
         <button class="btn btn-primary">Cadastrar produto</button>
     </form>

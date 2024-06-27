@@ -13,6 +13,7 @@ $this->layout('master', ['title' => 'Gerenciar produtos']);
         <form class="form ms-auto" action="/admin/cadastrarproduto" method="get">
             <button class="btn btn-primary ms-auto">Cadastrar novo produto</button>
             <input type="hidden" name="setorNome" value="<?php echo $setorNome; ?>">
+            <input type="hidden" name="setorId" value="<?php echo $setorId; ?>">
         </form>
     </div>
     <br>

@@ -44,4 +44,11 @@ class ProdutoController extends Controller
         return $buscaResult;
     }
 
+    public function cadastrarProduto(string $produto, $marcaId, $medida, $unidadeMedida, $setorId, $caminhoImg)
+    {
+        $produtoModel = new Produto();
+        $erro = $produtoModel->cadastrarProduto($produto, $marcaId, $medida, $unidadeMedida, $setorId, $caminhoImg);
+        return $erro;
+    }
+
 }

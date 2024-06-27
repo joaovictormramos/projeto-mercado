@@ -62,9 +62,10 @@ class AdminController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $setorNome = $_GET['setorNome'];
+            $setorId = $_GET['setorId'];
             $marcasController = new MarcaController();
             $marcas = $marcasController->getMarcas();
-            $this->view('admin/cadastrarproduto', ['marcas' => $marcas, 'setorNome' => $setorNome]);
+            $this->view('admin/cadastrarproduto', ['marcas' => $marcas, 'setorNome' => $setorNome, 'setorId' => $setorId]);
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -73,22 +74,33 @@ class AdminController extends Controller
                 $marcaId = $_POST['marcaId'];
                 $medida = $_POST['medida'];
                 $unidadeMedida = $_POST['unidadeMedida'];
-                $marcaNome = $_POST['marca_nome'][$marcaId];
-                echo $produto . '<br>';
-                echo $marcaId . '<br>';
-                echo $medida . '<br>';
-                echo $unidadeMedida . '<br>';
-                echo $marcaNome . '<br>';
-            }
-            if (isset($_FILES['imgproduto'])) {
-                $img = $_FILES['imgproduto'];
-                var_dump($img);
-                $name = $img['name'];
-                $pasta = '/assets/images/imagens_produtos';
-            }
+                $setorId = $_POST['setorId'];
+                if (isset($_FILES['imgproduto'])) {
+                    $img = $_FILES['imgproduto'];
+                    $name = str_replace(' ', '', $_POST['produto'] . $_POST['marcaId'] . '.');
+                    $extensao = strtolower(pathinfo($img['name'], PATHINFO_EXTENSION));
+                    $pasta = '/opt/lampp/htdocs/public/assets/images/imagens_produtos/';
+                    $caminhoImg = $pasta . $name . $extensao;
+                    move_uploaded_file($img['tmp_name'], $caminhoImg);
+                    
+                    $pasta = '/assets/images/imagens_produtos/';
+                    $caminhoImg = $pasta . $name . $extensao;
+                }
 
-        } else {
-
+                $newProduto = new ProdutoController();
+                $erro = $newProduto->cadastrarProduto($produto, $marcaId, $medida, $unidadeMedida, $setorId, $caminhoImg);
+                
+                if (!empty($erro)) {
+                    $msgHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';
+                } else {
+                    $msg = "Produto cadastrado com sucesso.";
+                    $msgHtml = '<div class="alert alert-success" role="alert">' . $msg . '</div>';
+                }
+                $this->view('admin/cadastrarproduto', ['msgHtml' => $msgHtml]);
+                
+            } else {
+            
+            }
         }
     }
 
