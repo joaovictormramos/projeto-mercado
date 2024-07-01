@@ -20,4 +20,11 @@ class EstabelecimentoController extends Controller
         return $estabelecimentos;
     }
 
+    public function cadastrarEstabelecimento($estabelecimentoNome, $estabelecimentoEndereco)
+    {
+        $estabelecimento = new Estabelecimento();
+        $erro = $estabelecimento->cadastrarEstabelecimento($estabelecimentoNome, $estabelecimentoEndereco);
+        return $erro;
+    }
+
 }

@@ -7,6 +7,9 @@ $this->layout('master', ['title' => 'Gerenciar estabelecimento'])
     <h4>Gerenciar estabelecimento</h4>
     <div class="d-flex align-items-center mb-3">
         <a class="btn btn-danger me-auto" href="javascript:history.back()">Voltar</a>
+        <form class="form ms-auto" action="/admin/cadastrarestabelecimento" method="get">
+            <button class="btn btn-primary ms-auto">Cadastrar estabelecimento</button>
+        </form>
     </div>
     <table>
         <?php
@@ -17,7 +20,7 @@ foreach ($estabelecimentos as $estabelecimento) {?>
             </td>
             <td>
                 <form action="/admin/editarestoque/" method="post">
-                    <button name="idEstabelecimento" value="<?php echo $estabelecimento->estabelecimento_id;?>">Editar
+                    <button class="btn btn-success" name="idEstabelecimento" value="<?php echo $estabelecimento->estabelecimento_id;?>">Editar
                         estoque</button>
                     <input type="hidden" name="estabelecimento"
                         value="<?php echo $estabelecimento->estabelecimento_nome; ?>">

@@ -76,4 +76,3 @@ foreach ($listaDesc as $produto) {
     </table>
     <a class="btn btn-primary m-2" href="../minhaslistas">Retornar</a>
 </div>
-<?php var_dump($listaDesc);
