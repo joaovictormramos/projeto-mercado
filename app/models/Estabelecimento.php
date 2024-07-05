@@ -31,7 +31,8 @@ class Estabelecimento
         try {
             $stmt->execute();
         } catch (\PDOException $e){
-            return $e->getMessage();
+            $e = 'Erro ao cadastrar estabelecimento.';
+            return $e;
         }        
     }
 }

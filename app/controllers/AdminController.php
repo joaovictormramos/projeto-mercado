@@ -39,25 +39,33 @@ class AdminController extends Controller
 
     public function cadastrarEstabelecimento()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $this->view('admin/cadastrarEstabelecimento');
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
         }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST)) {
-                $estabelecimentoNome = $_POST['estabelecimento'];
-                $estabelecimentoEndereco = $_POST['endereco'];
-                $estabelecimentoController = new EstabelecimentoController();
-                $erro = $estabelecimentoController->cadastrarEstabelecimento($estabelecimentoNome, $estabelecimentoEndereco);
-
-                if (!empty($erro)) {
-                    $msgHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';
-                } else {
-                    $msg = "Estabelecimento cadastrada com sucesso.";
-                    $msgHtml = '<div class="alert alert-success" role="alert">' . $msg . '</div>';
-                }
-                $this->view('admin/cadastrarEstabelecimento', ['msgHtml' => $msgHtml]);
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                $this->view('admin/cadastrarEstabelecimento');
             }
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (isset($_POST)) {
+                    $estabelecimentoNome = $_POST['estabelecimento'];
+                    $estabelecimentoEndereco = $_POST['endereco'];
+                    $estabelecimentoController = new EstabelecimentoController();
+                    $erro = $estabelecimentoController->cadastrarEstabelecimento($estabelecimentoNome, $estabelecimentoEndereco);
+
+                    if (!empty($erro)) {
+                        $msgHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';
+                    } else {
+                        $msg = "Estabelecimento cadastrada com sucesso.";
+                        $msgHtml = '<div class="alert alert-success" role="alert">' . $msg . '</div>';
+                    }
+                    $this->view('admin/cadastrarEstabelecimento', ['msgHtml' => $msgHtml]);
+                }
+            }
+        } else {
+            $this->redirect('/');
         }
     }
 

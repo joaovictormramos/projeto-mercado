@@ -25,12 +25,12 @@ class Produto
         $stmt->bindParam(4, $unidadeMedida, \PDO::PARAM_STR);
         $stmt->bindParam(5, $setorId, \PDO::PARAM_INT);
         $stmt->bindParam(6, $caminhoImg, \PDO::PARAM_STR);
-        //try {
+        try {
             $stmt->execute();
-        //} catch (\PDOException){
-            //$erro = "Falha ao cadastrar produto.";
-            //return $erro;
-        //}
+        } catch (\PDOException){
+            $erro = "Falha ao cadastrar produto.";
+            return $erro;
+        }
     }
 
     //método lista todos os produtos
