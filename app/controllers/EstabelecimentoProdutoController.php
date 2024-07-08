@@ -21,29 +21,11 @@ class EstabelecimentoProdutoController extends Controller
         return $produtosNaoCadastrados;
     }
 
-    public function cadastrarProdutoEstabelecimento()
+    public function cadastrarProdutoEstabelecimento($preco, $produtoId, $estabelecimentoId)
     {
-        $estabelecimentoId = $_POST['estabelecimento_id'];
-        $produtoId = $_POST['produto_id'];
-        $produtoController = new ProdutoController();
-        $descProduto = $produtoController->descProduto($produtoId);
-        $this->view('admin/cadastrarProduto', ['descProduto' => $descProduto, 'estabelecimentoId' => $estabelecimentoId, 'produtoId' => $produtoId]);
-    }
-
-    public function confirmaCadastro()
-    {
-        if (empty($_POST['estabelecimento_id']) || empty($_POST['produto_id']) || empty($_POST['preco'])) {
-            echo 'Erro';
-        }
-        $estabelecimentoId = $_POST['estabelecimento_id'];
-        $produtoId = $_POST['produto_id'];
-        $precoProduto = $_POST['preco'];
-
         $estabelecimentoProduto = new EstabelecimentoProduto();
-        $estabelecimentoProduto->confirmaCadastro($estabelecimentoId, $produtoId, $precoProduto);
-
-        $adminController = new AdminController();
-        $adminController->editarEstoque();
+        $msg = $estabelecimentoProduto->cadastrarProdutoEstabelecimento($preco, $produtoId, $estabelecimentoId);
+        return $msg;
     }
 
     //Lista todos os produtos de um estabelecimento utiliando método do model EstabelecimentoProdutostabelecimento e passando o id para listar seus produtos.

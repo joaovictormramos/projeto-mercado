@@ -68,14 +68,40 @@ echo $produtoCompleto;
                     <?php foreach ($setores as $setorNaoCadastrado): ?>
                     <div class="tab-pane fade" id="v-pills-profile-<?=$setorNaoCadastrado->setor_id?>" role="tabpanel"
                         aria-labelledby="v-pills-profile-<?=$setorNaoCadastrado->setor_id?>-tab">
-                        <?php foreach ($produtosACadastrar as $produtoACadastrar): ?>
-                        <?php if ($produtoACadastrar->setor_id == $setorNaoCadastrado->setor_id): ?>
-                        <p><?php
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Preço</th>
+                                    <th>Cadastrar</th>
+                                </tr>
+                            </thead>
+                            <?php foreach ($produtosACadastrar as $produtoACadastrar): ?>
+                            <form action="/admin/cad" method="post">
+                                <tr>
+                                    <?php if ($produtoACadastrar->setor_id == $setorNaoCadastrado->setor_id): ?>
+                                    <td>
+                                        <?php
 echo $produtoACadastrar->produto_produto . ' ' . $produtoACadastrar->marca_nome . ' ' . str_replace('.', ',', (string) $produtoACadastrar->produto_medida) . $produtoACadastrar->produto_unidademedida;
 ?>
-                        </p>
-                        <?php endif;?>
-                        <?php endforeach;?>
+                                    </td>
+                                    <td>
+                                        <input type="text" name="preco[<?=$produtoACadastrar->produto_id?>]" id="">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="produtos[]" value="<?php echo $produtoACadastrar->produto_id; ?>" id="">
+                                        <?php endif;?>
+                                        <?php endforeach;?>
+                                    </td>
+                                </tr>
+                                <input type="hidden" name="estabelecimentoId" value="<?php echo $estabelecimentoId; ?>">
+                                <tr>
+                                    <td colspan=3>
+                                        <button class="btn btn-success">Cadastrar produtos selecionados</button>
+                                    </td>
+                                </tr>
+                            </form>
+                        </table>
                     </div>
                     <?php endforeach;?>
                 </div>

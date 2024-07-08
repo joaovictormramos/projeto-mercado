@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\EstabelecimentoProduto;
+
 class AdminController extends Controller
 {
     //Chama o painel de administrador.
@@ -89,7 +91,7 @@ class AdminController extends Controller
             $estabelecimentoProdutoController = new EstabelecimentoProdutoController();
             $produtosACadastrar = $estabelecimentoProdutoController->produtosNaoCadastrados($idEstabelecimento);
 
-            $this->view('admin/editarEstoque', ['estabelecimentoProdutos' => $estabelecimentoProdutos, 'produtosACadastrar' => $produtosACadastrar, 'estabelecimentoId' => $idEstabelecimento, 'nomeEstabelecimento' => $nomeEstabelecimento, 'setores' => $setores]);
+            $this->view('/admin/editarEstoque', ['estabelecimentoProdutos' => $estabelecimentoProdutos, 'produtosACadastrar' => $produtosACadastrar, 'estabelecimentoId' => $idEstabelecimento, 'nomeEstabelecimento' => $nomeEstabelecimento, 'setores' => $setores]);
         } else {
             $this->redirect('/');
         }
@@ -237,13 +239,39 @@ class AdminController extends Controller
                     $msg = "Marca cadastrada com sucesso.";
                     $msgHtml = '<div class="alert alert-success" role="alert">' . $msg . '</div>';
                 }
-                $this->view('admin/gerenciarMarca', ['msgHtml' => $msgHtml]);
+                $this->view('/admin/gerenciarMarca', ['msgHtml' => $msgHtml]);
             } else {
-                $this->view('admin/cadastrarMarca');
+                $this->view('/admin/cadastrarMarca');
             }
         } else {
 
             $this->redirect('/');
+        }
+    }
+
+    public function cad()
+    {
+        if (isset($_POST)) {
+            // Exemplo de como acessar os preços e IDs dos produtos selecionados
+            $precos = $_POST['preco'];
+            $produtosSelecionados = $_POST['produtos'];
+            $estabelecimentoId = $_POST['estabelecimentoId'];
+
+            foreach ($produtosSelecionados as $produtoId) {
+                if (isset($precos[$produtoId])) {
+                    $preco = (float) str_replace(',', '.', $precos[$produtoId]);
+                    $estabelecimentoProdutoController = new EstabelecimentoProdutoController();
+                    $erro = $estabelecimentoProdutoController->cadastrarProdutoEstabelecimento($preco, $produtoId, $estabelecimentoId);
+                    
+                    if (!empty($erro)) {
+                        $msgHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';
+                    } else {
+                        $msg = "Marca cadastrada com sucesso.";
+                        $msgHtml = '<div class="alert alert-success" role="alert">' . $msg . '</div>';
+                    }
+                    $this->redirect('/admin/gerenciarestabelecimento');
+                }
+            }
         }
     }
 

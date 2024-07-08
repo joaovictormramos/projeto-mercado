@@ -14,7 +14,7 @@ class EstabelecimentoProduto
     }
 
     //Faz o cadastro do produto no estabelecimento, adicionando o preço do produto.
-    public function confirmaCadastro($estabelecimentoId, $produtoId, $produtoPreco)
+    public function cadastrarProdutoEstabelecimento($preco, $produtoId, $estabelecimentoId)
     {
         // Verificar se o produto já está cadastrado para o estabelecimento
         $verificaSql = "SELECT COUNT(*) FROM tb_pjm_estabelecimento_produto WHERE estabelecimento_id = (?) AND produto_id = (?)";
@@ -34,15 +34,13 @@ class EstabelecimentoProduto
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $estabelecimentoId, \PDO::PARAM_INT);
         $stmt->bindParam(2, $produtoId, \PDO::PARAM_INT);
-        $stmt->bindParam(3, $produtoPreco, \PDO::PARAM_STR);
+        $stmt->bindParam(3, $preco, \PDO::PARAM_STR);
 
-        $bemSucedido = $stmt->execute();
-
-        if ($bemSucedido) {
-            return "Cadastro bem-sucedido!";
-        } else {
-            $erro = $stmt->errorInfo();
-            return "Erro ao cadastrar produto: " . $erro[2];
+        try {
+            $stmt->execute();
+        } catch (\PDOException) {
+            $erro = "Erro ao cadastrar produto";
+            return $erro;
         }
     }
 
