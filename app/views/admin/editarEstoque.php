@@ -23,28 +23,37 @@ $this->layout('master', ['title' => 'Editar estoque']);
                 <div class="nav flex-column nav-pills me-3" id="v-pills-home-tab" role="tablist"
                     aria-orientation="vertical">
                     <?php foreach ($setores as $setor): ?>
-                    <button class="nav-link" id="v-pills-home-<?=$setor->setor_id?>-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-home-<?=$setor->setor_id?>" type="button" role="tab"
-                        aria-controls="v-pills-home-<?=$setor->setor_id?>" aria-selected="false">
+                    <button class="nav-link" id="v-pills-home-<?=$setor->setor_id?>-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home-<?=$setor->setor_id?>" type="button" role="tab" aria-controls="v-pills-home-<?=$setor->setor_id?>" aria-selected="false">
                         <?=$setor->setor_nome?>
                     </button>
                     <?php endforeach;?>
                 </div>
 
                 <div class="tab-content" id="v-pills-home-tabContent">
-                    <?php foreach ($setores as $setor): ?>
-                    <div class="tab-pane fade" id="v-pills-home-<?=$setor->setor_id?>" role="tabpanel"
-                        aria-labelledby="v-pills-home-<?=$setor->setor_id?>-tab">
-                        <?php foreach ($estabelecimentoProdutos as $produto): ?>
-                        <?php if ($produto->setor_id == $setor->setor_id): ?>
-                        <p>
-                            <?php
-$produtoCompleto = $produto->produto_produto . ' ' . $produto->marca_nome . ' ' . str_replace('.', ',', (string) $produto->produto_medida) . $produto->produto_unidademedida . ' R$' . number_format($produto->estabelecimento_produto_preco, 2, ',');
+                    
+                <?php foreach ($setores as $setor): ?>
+                    <div class="tab-pane fade" id="v-pills-home-<?=$setor->setor_id?>" role="tabpanel" aria-labelledby="v-pills-home-<?=$setor->setor_id?>-tab">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>R$</th>
+                                </tr>
+                            </thead>
+                            <?php foreach ($estabelecimentoProdutos as $produto): ?>
+                            <tr>
+                            <?php if ($produto->setor_id == $setor->setor_id): ?>
+                                <td>
+                                <?php
+$produtoCompleto = $produto->produto_produto . ' ' . $produto->marca_nome . ' ' . str_replace('.', ',', (string) $produto->produto_medida) . $produto->produto_unidademedida . ' </td><td>R$' . number_format($produto->estabelecimento_produto_preco, 2, ',');
 echo $produtoCompleto;
-?>
-                        </p>
+?>                              </td>
+
                         <?php endif;?>
+                                </tr>
+                        
                         <?php endforeach;?>
+                        </table>
                     </div>
                     <?php endforeach;?>
                 </div>
@@ -56,18 +65,14 @@ echo $produtoCompleto;
                 <div class="nav flex-column nav-pills me-3" id="v-pills-profile-tab" role="tablist"
                     aria-orientation="vertical">
                     <?php foreach ($setores as $setorNaoCadastrado): ?>
-                    <button class="nav-link" id="v-pills-profile-<?=$setorNaoCadastrado->setor_id?>-tab"
-                        data-bs-toggle="pill" data-bs-target="#v-pills-profile-<?=$setorNaoCadastrado->setor_id?>"
-                        type="button" role="tab" aria-controls="v-pills-profile-<?=$setorNaoCadastrado->setor_id?>"
-                        aria-selected="false">
+                    <button class="nav-link" id="v-pills-profile-<?=$setorNaoCadastrado->setor_id?>-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile-<?=$setorNaoCadastrado->setor_id?>" type="button" role="tab" aria-controls="v-pills-profile-<?=$setorNaoCadastrado->setor_id?>" aria-selected="false">
                         <?=$setorNaoCadastrado->setor_nome?>
                     </button>
                     <?php endforeach;?>
                 </div>
                 <div class="tab-content" id="v-pills-profile-tabContent">
                     <?php foreach ($setores as $setorNaoCadastrado): ?>
-                    <div class="tab-pane fade" id="v-pills-profile-<?=$setorNaoCadastrado->setor_id?>" role="tabpanel"
-                        aria-labelledby="v-pills-profile-<?=$setorNaoCadastrado->setor_id?>-tab">
+                    <div class="tab-pane fade" id="v-pills-profile-<?=$setorNaoCadastrado->setor_id?>" role="tabpanel" aria-labelledby="v-pills-profile-<?=$setorNaoCadastrado->setor_id?>-tab">
                         <table>
                             <thead>
                                 <tr>

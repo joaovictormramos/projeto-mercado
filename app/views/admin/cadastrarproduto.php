@@ -42,22 +42,22 @@ $this->layout('master', ['title' => 'Gerenciar produtos']);
                                 <div class="form-check form-check-inline">
                                     <abbr title="Quilogramas"><label class="form-check-label"
                                             for="unidadeMedida">Kg</label></abbr>
-                                    <input class="form-check-input" type="radio" name="unidadeMedida" id="" value="Kg">
+                                    <input class="form-check-input" type="radio" name="unidadeMedida" id="" value=" Kg">
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <abbr title="gramas"><label class="form-check-label"
                                             for="unidadeMedida">g</label></abbr>
-                                    <input class="form-check-input" type="radio" name="unidadeMedida" id="" value="g">
+                                    <input class="form-check-input" type="radio" name="unidadeMedida" id="" value=" g">
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <abbr title="Litros"><label class="form-check-label"
                                             for="unidadeMedida">L</label></abbr>
-                                    <input class="form-check-input" type="radio" name="unidadeMedida" id="" value="L">
+                                    <input class="form-check-input" type="radio" name="unidadeMedida" id="" value=" L">
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <abbr title="miliLitros"><label class="form-check-label"
                                             for="unidadeMedida">mL</label></abbr>
-                                    <input class="form-check-input" type="radio" name="unidadeMedida" id="" value="mL">
+                                    <input class="form-check-input" type="radio" name="unidadeMedida" id="" value=" mL">
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <abbr title="Unidade"><label class="form-check-label"

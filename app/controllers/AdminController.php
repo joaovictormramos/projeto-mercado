@@ -262,14 +262,6 @@ class AdminController extends Controller
                     $preco = (float) str_replace(',', '.', $precos[$produtoId]);
                     $estabelecimentoProdutoController = new EstabelecimentoProdutoController();
                     $erro = $estabelecimentoProdutoController->cadastrarProdutoEstabelecimento($preco, $produtoId, $estabelecimentoId);
-                    
-                    if (!empty($erro)) {
-                        $msgHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';
-                    } else {
-                        $msg = "Marca cadastrada com sucesso.";
-                        $msgHtml = '<div class="alert alert-success" role="alert">' . $msg . '</div>';
-                    }
-                    $this->redirect('/admin/gerenciarestabelecimento');
                 }
             }
         }
