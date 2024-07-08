@@ -77,15 +77,19 @@ class AdminController extends Controller
         }
 
         if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
+
             $idEstabelecimento = $_POST['idEstabelecimento'];
             $nomeEstabelecimento = $_POST['estabelecimento'];
             $estabelecimentoProdutoController = new EstabelecimentoProdutoController();
             $estabelecimentoProdutos = $estabelecimentoProdutoController->exibirProdutos($idEstabelecimento);
 
+            $setores = new SetorController();
+            $setores = $setores->getSetor();
+
             $estabelecimentoProdutoController = new EstabelecimentoProdutoController();
             $produtosACadastrar = $estabelecimentoProdutoController->produtosNaoCadastrados($idEstabelecimento);
 
-            $this->view('admin/editarEstoque', ['estabelecimentoProdutos' => $estabelecimentoProdutos, 'produtosACadastrar' => $produtosACadastrar, 'estabelecimentoId' => $idEstabelecimento, 'nomeEstabelecimento' => $nomeEstabelecimento]);
+            $this->view('admin/editarEstoque', ['estabelecimentoProdutos' => $estabelecimentoProdutos, 'produtosACadastrar' => $produtosACadastrar, 'estabelecimentoId' => $idEstabelecimento, 'nomeEstabelecimento' => $nomeEstabelecimento, 'setores' => $setores]);
         } else {
             $this->redirect('/');
         }
@@ -105,6 +109,7 @@ class AdminController extends Controller
             $this->redirect('/');
         }
     }
+
     public function editarSetor()
     {
         if (session_status() == PHP_SESSION_NONE) {
