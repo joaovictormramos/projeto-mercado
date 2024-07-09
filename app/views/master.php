@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="300;URL=/">
     <title><?=$this->e($title)?></title>
     <link rel="shortcut icon" type="imagex/icon" href="/assets/images/imagens-aplicacao/icon.ico">
     <link rel="stylesheet" href="/assets/css/estilo.css">
