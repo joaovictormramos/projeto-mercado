@@ -1,7 +1,7 @@
 # SupportMercado
 
 ### Este projeto é uma aplicação web para gerenciar lista de compras.
-### Permite ao usuário criar, editar, remover listas de comprars,
+### Permite ao usuário criar, editar, remover listas de compras,
 ### adicionar e remover itens, fazendo uma bucando do estabelecimento 
 ### com o melhor custo final do total da lista.
 ### Os preços são atualizados diariamente, de acordo com as atualizações de
