@@ -34,7 +34,6 @@ class EstabelecimentoProdutoController extends Controller
         $produtos = new EstabelecimentoProduto();
         $produtos = $produtos->listarProdutos($estabelecimentoId);
         return $produtos;
-
     }
 
     //Lista produtos não cadastrados no estabeleicmento com ID passado por parâmetro.

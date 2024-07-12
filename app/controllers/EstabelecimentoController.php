@@ -27,4 +27,15 @@ class EstabelecimentoController extends Controller
         return $erro;
     }
 
+    public function listarProdutos()
+    {
+        $estabelecimentoNome = $_POST['estabelecimentoNome'];
+        $estabelecimentoID = $_POST['estabelecimentoID'];
+        $produtos = new EstabelecimentoProdutoController();
+        $produtos = $produtos->listarProdutos($estabelecimentoID);
+
+        $this->view('produtosEstabelecimento', ['produtos' => $produtos, 'estabelecimentoNome' => $estabelecimentoNome]);
+
+    }
+
 }
