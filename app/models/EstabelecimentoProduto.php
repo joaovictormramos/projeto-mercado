@@ -47,8 +47,8 @@ class EstabelecimentoProduto
     //método lista todos os produtos de um estabelecimento recebendo um parâmetro (id do estabelecimento).
     public function listarProdutos($estabelecimentoId)
     {
-        $sql = "SELECT produto.produto_id, produto.produto_produto, marca.marca_nome, produto.produto_medida, setor.setor_id,
-                setor.setor_nome, produto.produto_unidademedida, esta_prod.estabelecimento_produto_preco
+        $sql = "SELECT produto.produto_id, produto.produto_produto, marca.marca_nome, produto.produto_medida, setor.setor_id, esta_prod.estabelecimento_produto_preco,
+                setor.setor_nome, produto.produto_unidademedida, esta_prod.estabelecimento_produto_preco, produto.produto_caminho_img
                 FROM tb_pjm_produto produto JOIN tb_pjm_marca marca ON marca.marca_id = produto.marca_id
                 JOIN tb_pjm_estabelecimento_produto esta_prod ON esta_prod.produto_id = produto.produto_id
                 JOIN tb_pjm_setor setor ON setor.setor_id = produto.setor_id

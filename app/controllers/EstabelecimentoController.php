@@ -29,12 +29,14 @@ class EstabelecimentoController extends Controller
 
     public function listarProdutos()
     {
+        $setorController = new SetorController();
+        $setores = $setorController->getSetor();
         $estabelecimentoNome = $_POST['estabelecimentoNome'];
         $estabelecimentoID = $_POST['estabelecimentoID'];
         $produtos = new EstabelecimentoProdutoController();
         $produtos = $produtos->listarProdutos($estabelecimentoID);
 
-        $this->view('produtosEstabelecimento', ['produtos' => $produtos, 'estabelecimentoNome' => $estabelecimentoNome]);
+        $this->view('produtosEstabelecimento', ['produtos' => $produtos, 'estabelecimentoNome' => $estabelecimentoNome, 'setores' => $setores]);
 
     }
 
