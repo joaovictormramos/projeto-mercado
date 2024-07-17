@@ -32,9 +32,12 @@ class UsuarioController extends Controller
             session_start();
         }
 
+        $setorController = new SetorController();
+        $setores = $setorController->getSetor();
+
         $produtosController = new ProdutoController();
-        $produtos = $produtosController->listarProdutos();
-        $this->view('usuario/criarLista', ['produtos' => $produtos]);
+        $produtosEstabelecimento = $produtosController->listarProdutos();
+        $this->view('usuario/criarLista', ['produtosEstabelecimento' => $produtosEstabelecimento, 'setores' => $setores]);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $usuarioId = $_SESSION['usuario_id'];
@@ -44,7 +47,7 @@ class UsuarioController extends Controller
             $quantidades = [];
 
             // Iterar sobre os produtos para capturar as quantidades enviadas
-            foreach ($produtos as $produto) {
+            foreach ($produtosEstabelecimento as $produto) {
                 $produtoId = $produto->produto_id;
                 if (isset($_POST[$produtoId]) && $_POST[$produtoId] > 0) {
                     $quantidades[$produtoId] = $_POST[$produtoId];

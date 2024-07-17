@@ -68,17 +68,17 @@ class AuthController extends Controller
                     } else {
                         $erro = 'E-mail ou senha incorretos.';
                     }
-                    
-
-                } else if ($auth->login($email, $senha) == true) {
-                    $logado = $_SESSION['logado'];
-                    $this->view('/partials/header', ['logado' => $logado]);
-                    $this->redirect('/');
-                    return;
 
                 } else {
-                    $erro = 'E-mail ou senha incorretos.';
-
+                    $login = $auth->login($email, $senha);
+                    if ($login === true) {
+                        $logado = $_SESSION['logado'];
+                        $this->view('/partials/header', ['logado' => $logado]);
+                        $this->redirect('/');
+                        return;
+                    } else {
+                        $erro = $auth->login($email, $senha);
+                    }
                 }
 
                 $erroHtml = '<div class="alert alert-danger" role="alert">' . $erro . '</div>';

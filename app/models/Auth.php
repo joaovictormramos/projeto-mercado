@@ -15,7 +15,7 @@ class Auth
 
     //cadastro usuário
     public function cadastrarUsuario($nome, $cpf, $email, $senha)
-    {
+    {   
         $sql = "INSERT INTO tb_pjm_usuario(usuario_nome_completo, usuario_cpf, usuario_email, usuario_senha)
         VALUES (?, ?, ?, ?)";
         $stmt = $this->connection->prepare($sql);
@@ -37,7 +37,8 @@ class Auth
         $usuario = $stmt->fetch(\PDO::FETCH_OBJ);
 
         if (!$usuario || !password_verify($senha, $usuario->usuario_senha)) {
-            return false;
+            $message = 'E-mail ou senha incorretos.';
+            return $message;
         } else {
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
