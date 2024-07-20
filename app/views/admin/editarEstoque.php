@@ -1,7 +1,7 @@
 <?php
 $this->layout('master', ['title' => 'Editar estoque']);
 ?>
-
+<h1><?php echo $erro; ?></h1>
 <div class="container">
     <h2><?php echo $nomeEstabelecimento; ?></h2>
     <div class="d-flex align-items-center mb-3">

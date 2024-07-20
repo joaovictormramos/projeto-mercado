@@ -4,7 +4,7 @@ $this->layout('master', ['title' => 'Home - SupportMercado']);
 
 <div class="container">
 
-  <?php foreach ($produtosPorSetor as $setorNome => $produtos) {?>
+  <?php foreach ($produtosPorSetor as $setorNome => $produtos) { ?>
   <br>
   <br>
   <h3 class="text-start"><?php echo $setorNome; ?></h3>
@@ -27,7 +27,6 @@ $chunks = array_chunk($produtos, 4); // Dividir os produtos em grupos de 4 para 
                 <p class="card-text">
                   <?php echo $produto->produto_produto . ' ' . $produto->marca_nome . ' ' . str_replace('.', ',', (string) $produto->produto_medida) . $produto->produto_unidademedida; ?>
                 </p>
-                <h4>R$</h4>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
                     <button type="button" class="btn btn-sm btn-outline-secondary">Adicionar</button>

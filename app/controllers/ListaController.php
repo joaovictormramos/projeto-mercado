@@ -5,25 +5,31 @@ use app\models\Lista;
 
 class ListaController extends Controller
 {
-    public function criarLista($usuarioId, $listaNome = null, $data = null, array $quantidades = [])
+    public function criarLista($userID, $listName, $appointmentDay)
     {
         $listaModel = new Lista();
-        $listaModel->criarLista($usuarioId, $listaNome, $data, $quantidades);
-        $this->redirect('criarlista');
+        $listaModel->criarLista($userID, $listName, $appointmentDay);
     }
 
-    public function minhasListas($usuarioId)
+    public function minhasListas($usuarioID)
     {
         $lista = new Lista();
-        $listasUsuario = $lista->minhasListas($usuarioId);
+        $listasUsuario = $lista->minhasListas($usuarioID);
         return $listasUsuario;
     }
 
-    public function detalheLista($listaId)
+    public function detalheLista($listID)
     {
         $lista = new Lista();
-        $listaDesc = $lista->detalheLista($listaId);
+        $listaDesc = $lista->detalheLista($listID);
         return $listaDesc;
+    }
+
+    public function deleteList($listID)
+    {
+        $list = new Lista();
+        $message = $list->deleteList($listID);
+        return $message;
     }
 
 }

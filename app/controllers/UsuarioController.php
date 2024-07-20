@@ -19,11 +19,11 @@ class UsuarioController extends Controller
             exit();
         }
 
-        $dadosUsuario = [
+        $userData = [
             'nome' => $_SESSION['nome'],
             'email' => $_SESSION['email'],
         ];
-        $this->view('usuario/perfil', $dadosUsuario);
+        $this->view('usuario/perfil', $userData);
     }
 
     public function criarLista()
@@ -40,22 +40,28 @@ class UsuarioController extends Controller
         $this->view('usuario/criarLista', ['produtosEstabelecimento' => $produtosEstabelecimento, 'setores' => $setores]);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $usuarioId = $_SESSION['usuario_id'];
-            $listaNome = $_POST['listaNome'];
-            $agendamento = $_POST['data'];
+            $userID = $_SESSION['id'];
 
-            $quantidades = [];
+            $listName = $_POST['listName'];
+            $appointmentDay = $_POST['appointmentDay'];
 
-            // Iterar sobre os produtos para capturar as quantidades enviadas
-            foreach ($produtosEstabelecimento as $produto) {
-                $produtoId = $produto->produto_id;
-                if (isset($_POST[$produtoId]) && $_POST[$produtoId] > 0) {
-                    $quantidades[$produtoId] = $_POST[$produtoId];
-                }
+            //$quantidades = [];
+            $userLists = new ListaController();
+            $userLists = $userLists->minhasListas($userID);
+            $listQuantity = count($userLists);
+
+            //Se o nome vier vazio do POST, então o nome receberá o nome padrão 'Lista' +  o número de listas do usuário + 1
+            if ($listName == "") {
+                $listName = "Lista " . $listQuantity + 1;
             }
 
-            $listaController = new ListaController();
-            $listaController->criarLista($usuarioId, !empty($listaNome) ? $listaNome : null, !empty($agendamento) ? $agendamento : null, $quantidades);
+            if ($appointmentDay == "") {
+                $appointmentDay = getdate();
+                $appointmentDay = $appointmentDay['year'] . '/' . $appointmentDay['mon'] . '/' . $appointmentDay['mday'];
+            }
+
+            $listController = new ListaController();
+            $listController->criarLista($userID, $listName, $appointmentDay);
         }
     }
 
@@ -65,18 +71,33 @@ class UsuarioController extends Controller
             session_start();
         }
 
-        $usuarioId = $_SESSION['id'];
-        $listaController = new ListaController();
-
-        $minhasListas = $listaController->minhasListas($usuarioId);
-        $this->view('usuario/minhaslistas', ['minhasListas' => $minhasListas]);
+        $userID = $_SESSION['id'];
+        $listController = new ListaController();
+        $userLists = $listController->minhasListas($userID);
+        $appointmentDay = getdate();
+        $appointmentDay = $appointmentDay['year'] . '/' . $appointmentDay['mon'] . '/' . $appointmentDay['mday'];
+        $this->view('usuario/minhaslistas', ['minhasListas' => $userLists]);
     }
 
-    public function detalhes($listaId)
+    public function detalhes($listID)
     {
-        $listaController = new ListaController();
-        $listaDesc = $listaController->detalheLista($listaId);
-        $this->view('usuario/detalhes', ['listaDesc' => $listaDesc]);
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $listController = new ListaController();
+        $getListDetails = $listController->detalheLista($listID);
+        $this->view('usuario/detalhes', ['listaDesc' => $getListDetails]);
+    }
+
+    public function deletarlista()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $listID = $_POST['listID'];
+        $listController = new ListaController();
+        $listController->deleteList($listID);
+        $this->redirect('/usuario/minhaslistas');
     }
 
 }

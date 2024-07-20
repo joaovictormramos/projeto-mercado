@@ -2,8 +2,6 @@
 
 namespace app\controllers;
 
-use app\models\EstabelecimentoProduto;
-
 class AdminController extends Controller
 {
     //Chama o painel de administrador.
@@ -13,7 +11,7 @@ class AdminController extends Controller
             session_start();
         }
 
-        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true && $_SESSION['isAdmin'] == true) {
             $nome = $_SESSION['nome'];
             $idAdmin = $_SESSION['id'];
             $isAdmin = $_SESSION['isAdmin'];
@@ -30,7 +28,7 @@ class AdminController extends Controller
             session_start();
         }
 
-        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true && $_SESSION['isAdmin'] == true) {
             $estabelecimentoController = new EstabelecimentoController();
             $estabelecimentos = $estabelecimentoController->exibirEstabelecimento();
             $this->view('admin/gerenciarEstabelecimento', ['estabelecimentos' => $estabelecimentos]);
@@ -45,7 +43,7 @@ class AdminController extends Controller
             session_start();
         }
 
-        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true && $_SESSION['isAdmin'] === true) {
             if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 $this->view('admin/cadastrarEstabelecimento');
             }
@@ -78,7 +76,7 @@ class AdminController extends Controller
             session_start();
         }
 
-        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true && $_SESSION['isAdmin'] === true) {
 
             $idEstabelecimento = $_POST['idEstabelecimento'];
             $nomeEstabelecimento = $_POST['estabelecimento'];
@@ -103,7 +101,7 @@ class AdminController extends Controller
             session_start();
         }
 
-        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true && $_SESSION['isAdmin'] === true) {
             $setores = new SetorController();
             $setores = $setores->getSetor();
             $this->view('admin/gerenciarProduto', ['setores' => $setores]);
@@ -118,7 +116,7 @@ class AdminController extends Controller
             session_start();
         }
 
-        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true && $_SESSION['isAdmin'] === true) {
             $setorId = $_POST['setorId'];
             $setorNome = $_POST['setorNome'];
             $produtoController = new ProdutoController();
@@ -135,7 +133,7 @@ class AdminController extends Controller
             session_start();
         }
 
-        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true && $_SESSION['isAdmin'] === true) {
 
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 $setorNome = $_GET['setorNome'];
@@ -198,7 +196,7 @@ class AdminController extends Controller
             session_start();
         }
 
-        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true && $_SESSION['isAdmin'] === true) {
             $marcas = new MarcaController();
             $marcas = $marcas->getMarcas();
             $this->view('admin/gerenciarMarca', ['marcas' => $marcas]);
@@ -251,20 +249,29 @@ class AdminController extends Controller
 
     public function cad()
     {
-        if (isset($_POST)) {
-            // Exemplo de como acessar os preços e IDs dos produtos selecionados
-            $precos = $_POST['preco'];
-            $produtosSelecionados = $_POST['produtos'];
-            $estabelecimentoId = $_POST['estabelecimentoId'];
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
-            foreach ($produtosSelecionados as $produtoId) {
-                if (isset($precos[$produtoId])) {
-                    $preco = (float) str_replace(',', '.', $precos[$produtoId]);
-                    $estabelecimentoProdutoController = new EstabelecimentoProdutoController();
-                    $erro = $estabelecimentoProdutoController->cadastrarProdutoEstabelecimento($preco, $produtoId, $estabelecimentoId);
+        if (isset($_SESSION['logado']) && $_SESSION['logado'] === true && $_SESSION['isAdmin'] === true) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // Exemplo de como acessar os preços e IDs dos produtos selecionados
+                $precos = $_POST['preco'];
+                $produtosSelecionados = $_POST['produtos'];
+                $estabelecimentoId = $_POST['estabelecimentoId'];
+
+                foreach ($produtosSelecionados as $produtoId) {
+                    if (isset($precos[$produtoId])) {
+                        $preco = (float) str_replace(',', '.', $precos[$produtoId]);
+                        $estabelecimentoProdutoController = new EstabelecimentoProdutoController();
+                        $erro = $estabelecimentoProdutoController->cadastrarProdutoEstabelecimento($preco, $produtoId, $estabelecimentoId);
+                        $this->redirect('/admin/gerenciarestabelecimento');
+                    }
                 }
+            } else {
+                $this->redirect('/');
+
             }
         }
     }
-
 }
