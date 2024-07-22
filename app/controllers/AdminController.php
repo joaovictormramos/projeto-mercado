@@ -277,6 +277,7 @@ class AdminController extends Controller
 
     public function editarProduto()
     {
-        
+        $product = new ProdutoController();
+        $getProduct = $product;
     }
 }

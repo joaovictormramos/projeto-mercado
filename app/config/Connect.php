@@ -2,10 +2,10 @@
 
 namespace app\config;
 
-define('HOST', 'localhost');
-define('DATABASENAME', 'PROJETOMERCADO');
+define('HOST', 'postgres.railway.internal');
+define('DATABASENAME', 'railway');
 define('USER', 'postgres');
-define('PASSWORD', 'postgres');
+define('PASSWORD', 'wkWPBnOQFXrthmBErLgmdxDNmssArJbr');
 
 class Connect
 {
