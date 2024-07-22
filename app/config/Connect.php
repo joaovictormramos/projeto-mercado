@@ -2,26 +2,24 @@
 
 namespace app\config;
 
-define('HOST', 'postgres.railway.internal');
-define('DATABASENAME', 'railway');
+define('HOST', 'localhost');
+define('DATABASENAME', 'PROJETOMERCADO');
 define('USER', 'postgres');
-define('PASSWORD', 'wkWPBnOQFXrthmBErLgmdxDNmssArJbr');
-define('PORT', '5432');
+define('PASSWORD', 'postgres');
 
 class Connect
 {
     private static $connection;
-    
+
     public function __construct()
     {
     }
 
     public static function connectDatabase()
     {
-        $dsn = 'pgsql:host=' . HOST . ';port=' . PORT . ';dbname=' . DATABASENAME;
         if (!isset(self::$connection)) {
             try {
-                self::$connection = new \PDO($dsn, USER, PASSWORD);
+                self::$connection = new \PDO('pgsql:host=' . HOST . ', dbname=' . DATABASENAME, USER, PASSWORD);
             } catch (\PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
                 die();
