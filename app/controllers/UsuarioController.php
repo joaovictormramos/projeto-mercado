@@ -89,7 +89,7 @@ class UsuarioController extends Controller
         $this->view('usuario/detalhes', ['listaDesc' => $getListDetails]);
     }
 
-    public function deletarlista()
+    public function deletarLista()
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
@@ -98,6 +98,11 @@ class UsuarioController extends Controller
         $listController = new ListaController();
         $listController->deleteList($listID);
         $this->redirect('/usuario/minhaslistas');
+    }
+
+    public function editarLista()
+    {
+        var_dump($_POST);
     }
 
 }
